@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Tooltip } from 'react-tooltip';
-import { CgProfile } from 'react-icons/cg';
+import { PiUserCircleThin } from 'react-icons/pi';
 import { BiWorld, BiPoll } from 'react-icons/bi';
 import { GoFileMedia } from 'react-icons/go';
 import { MdOutlineGifBox } from 'react-icons/md';
@@ -25,14 +25,14 @@ const Tweet = () => {
   return (
     <>
       <h1>Tweet component</h1>
-      <div className="flex border-2 border-red-600 w-96">
-        <div>
-          <CgProfile className="text-5xl" />
+      <div className="flex px-4 border-2 border-red-600 w-[634px] min-h-[124px]">
+        <div className="pt-3 mr-2">
+          <PiUserCircleThin className="w-10 h-10 text-5xl" />
         </div>
-        <div className="flex-1">
-          <div>
+        <div className="flex-1 flex flex-col justify-center pt-2">
+          <div className="py-3">
             <textarea
-              className="resize-none border-none outline-0"
+              className="resize-none border-none outline-0 text-custom w-[515px]"
               placeholder="What is happening?!"
               value={textAreaVal}
               onChange={onTextAreaChange}
@@ -41,13 +41,15 @@ const Tweet = () => {
               maxLength={280}
             ></textarea>
           </div>
-          <div>
-            <div>
-              <span className="text-sky-500">
-                <BiWorld /> Everyone can reply
-              </span>
+          <div className="pb-2">
+            <div className="flex pb-3  text-sky-500  cursor-pointer">
+              <a className="flex items-center space-x-2">
+                <BiWorld className="w-4 h-4" />
+                <span className="text-sm font-medium">Everyone can reply</span>
+              </a>
             </div>
-            <div className="flex">
+            <hr />
+            <div className="flex mt-2">
               <div className="flex-1 flex text-sky-500 space-x-2">
                 <GoFileMedia
                   data-tooltip-id="tooltip-media"
@@ -95,9 +97,14 @@ const Tweet = () => {
                   data-tooltip-place="bottom"
                   className="w-5 h-5 cursor-pointer"
                 />
+
                 <Tooltip id="tooltip-location" />
               </div>
-              <div>Post</div>
+              <div>
+                <button className="min-h-9 min-w-9 rounded-t-full rounded-b-full bg-sky-500 hover:bg-sky-600 duration-200 outline-none  px-4 text-white font-black">
+                  Post
+                </button>
+              </div>
             </div>
           </div>
         </div>
