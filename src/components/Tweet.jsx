@@ -50,7 +50,7 @@ const Tweet = () => {
             </div>
             <hr />
             <div className="flex mt-2">
-              <div className="flex-1 flex text-sky-500 space-x-2">
+              <div className="flex-1 flex text-sky-500 gap-4">
                 <GoFileMedia
                   data-tooltip-id="tooltip-media"
                   data-tooltip-content="Media"
