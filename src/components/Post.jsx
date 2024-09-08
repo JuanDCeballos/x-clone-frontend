@@ -38,44 +38,56 @@ const Post = () => {
           <div className="pb-2">
             <div className="flex mt-2">
               <div className="flex-1 flex text-gray-500 gap-24">
-                <TbMessageCircle
-                  data-tooltip-id="tooltip-reply"
-                  data-tooltip-content="Reply"
-                  data-tooltip-place="bottom"
-                  className="w-5 h-5 cursor-pointer"
-                />
-                <Tooltip id="tooltip-reply" />
+                <div className="flex items-center">
+                  <TbMessageCircle
+                    data-tooltip-id="tooltip-reply"
+                    data-tooltip-content="Reply"
+                    data-tooltip-place="bottom"
+                    className="w-5 h-5 cursor-pointer outline-none"
+                  />
+                  <Tooltip id="tooltip-reply" />
+                  <span>4</span>
+                </div>
 
-                <LiaRetweetSolid
-                  data-tooltip-id="tooltip-repost"
-                  data-tooltip-content="Repost"
-                  data-tooltip-place="bottom"
-                  className="w-5 h-5 cursor-pointer"
-                />
-                <Tooltip id="tooltip-repost" />
+                <div className="flex items-center">
+                  <LiaRetweetSolid
+                    data-tooltip-id="tooltip-repost"
+                    data-tooltip-content="Repost"
+                    data-tooltip-place="bottom"
+                    className="w-5 h-5 cursor-pointer outline-none"
+                  />
+                  <Tooltip id="tooltip-repost" />
+                  <span>1</span>
+                </div>
 
-                <CiHeart
-                  data-tooltip-id="tooltip-like"
-                  data-tooltip-content="Like"
-                  data-tooltip-place="bottom"
-                  className="w-5 h-5 cursor-pointer"
-                />
-                <Tooltip id="tooltip-like" />
+                <div className="flex items-center">
+                  <CiHeart
+                    data-tooltip-id="tooltip-like"
+                    data-tooltip-content="Like"
+                    data-tooltip-place="bottom"
+                    className="w-5 h-5 cursor-pointer outline-none"
+                  />
+                  <Tooltip id="tooltip-like" />
+                  <span>267</span>
+                </div>
 
-                <BiBarChart
-                  data-tooltip-id="tooltip-view"
-                  data-tooltip-content="View"
-                  data-tooltip-place="bottom"
-                  className="w-5 h-5 cursor-pointer"
-                />
-                <Tooltip id="tooltip-view" />
+                <div className="flex items-center">
+                  <BiBarChart
+                    data-tooltip-id="tooltip-view"
+                    data-tooltip-content="View"
+                    data-tooltip-place="bottom"
+                    className="w-5 h-5 cursor-pointer outline-none"
+                  />
+                  <Tooltip id="tooltip-view" />
+                  <span>10K</span>
+                </div>
               </div>
               <div className="flex gap-3">
                 <CiBookmark
                   data-tooltip-id="tooltip-bookmark"
                   data-tooltip-content="Bookmark"
                   data-tooltip-place="bottom"
-                  className="w-5 h-5 cursor-pointer"
+                  className="w-5 h-5 cursor-pointer outline-none"
                 />
                 <Tooltip id="tooltip-bookmark" />
 
@@ -83,7 +95,7 @@ const Post = () => {
                   data-tooltip-id="tooltip-share"
                   data-tooltip-content="Share"
                   data-tooltip-place="bottom"
-                  className="w-5 h-5 cursor-pointer"
+                  className="w-5 h-5 cursor-pointer outline-none"
                 />
 
                 <Tooltip id="tooltip-share" />
