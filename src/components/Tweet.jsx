@@ -55,7 +55,7 @@ const Tweet = () => {
                   data-tooltip-id="tooltip-media"
                   data-tooltip-content="Media"
                   data-tooltip-place="bottom"
-                  className="w-5 h-5 cursor-pointer"
+                  className="w-5 h-5 cursor-pointer outline-none"
                 />
                 <Tooltip id="tooltip-media" />
 
@@ -63,7 +63,7 @@ const Tweet = () => {
                   data-tooltip-id="tooltip-gif"
                   data-tooltip-content="GIF"
                   data-tooltip-place="bottom"
-                  className="w-5 h-5 cursor-pointer"
+                  className="w-5 h-5 cursor-pointer outline-none"
                 />
                 <Tooltip id="tooltip-gif" />
 
@@ -71,7 +71,7 @@ const Tweet = () => {
                   data-tooltip-id="tooltip-poll"
                   data-tooltip-content="Poll"
                   data-tooltip-place="bottom"
-                  className="w-5 h-5 cursor-pointer"
+                  className="w-5 h-5 cursor-pointer outline-none"
                 />
                 <Tooltip id="tooltip-poll" />
 
@@ -79,7 +79,7 @@ const Tweet = () => {
                   data-tooltip-id="tooltip-emoji"
                   data-tooltip-content="Emoji"
                   data-tooltip-place="bottom"
-                  className="w-5 h-5 cursor-pointer"
+                  className="w-5 h-5 cursor-pointer outline-none"
                 />
                 <Tooltip id="tooltip-emoji" />
 
@@ -87,7 +87,7 @@ const Tweet = () => {
                   data-tooltip-id="tooltip-schedule"
                   data-tooltip-content="Schedule"
                   data-tooltip-place="bottom"
-                  className="w-5 h-5 cursor-pointer"
+                  className="w-5 h-5 cursor-pointer outline-none"
                 />
                 <Tooltip id="tooltip-schedule" />
 
@@ -95,7 +95,7 @@ const Tweet = () => {
                   data-tooltip-id="tooltip-location"
                   data-tooltip-content="Location"
                   data-tooltip-place="bottom"
-                  className="w-5 h-5 cursor-pointer"
+                  className="w-5 h-5 cursor-pointer outline-none"
                 />
 
                 <Tooltip id="tooltip-location" />
