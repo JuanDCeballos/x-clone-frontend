@@ -1,10 +1,9 @@
-import Post from './Post';
+import { Post } from '../../Tweets/Components';
 
-const Feed = () => {
+export const Feed = () => {
   return (
     <>
-      <h1>Feed component</h1>
-      <div className="border-2 border-red-600 w-[634px]">
+      <div className="border-2 w-[634px]">
         <div className="flex text-center">
           <div className="flex-1 cursor-pointer">
             <span>For you</span>
@@ -20,5 +19,3 @@ const Feed = () => {
     </>
   );
 };
-
-export default Feed;
