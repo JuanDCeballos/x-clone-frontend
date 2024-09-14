@@ -27,7 +27,7 @@ export const Toolbar = () => {
 
   return (
     <>
-      {/* <ModalTweet isOpen={isOpen} closeModal={closeModal} /> */}
+      <ModalTweet isOpen={isOpen} closeModal={closeModal} />
       <div className="flex flex-col pr-8 justify-start items-end w-[395px] min-h-full p-2 bg-black">
         <div className="p-2 hover:bg-gray-800 rounded-full cursor-pointer mb-4">
           <FaXTwitter className="h-8 w-8 text-white" />
@@ -46,7 +46,7 @@ export const Toolbar = () => {
 
         <button
           className="w-10 bg-blue-400 text-white rounded-full shadow-lg hover:bg-blue-500 transition duration-200 mt-4 p-2"
-          onClick={() => openModal}
+          onClick={openModal}
         >
           <BsFeather className="h-6 w-6" />
         </button>
