@@ -8,7 +8,6 @@ ReactModal.setAppElement(document.getElementById('root'));
 export const ModalTweet = ({ isOpen, closeModal }) => {
   return (
     <>
-      |
       <ReactModal
         isOpen={isOpen}
         onRequestClose={closeModal}
@@ -20,6 +19,7 @@ export const ModalTweet = ({ isOpen, closeModal }) => {
             bottom: 'auto',
             marginRight: '-50%',
             transform: 'translate(-50%, -50%)',
+            background: 'black',
           },
         }}
       >
@@ -29,7 +29,7 @@ export const ModalTweet = ({ isOpen, closeModal }) => {
               data-tooltip-id="tooltip-close"
               data-tooltip-content="Close"
               data-tooltip-place="bottom"
-              className="w-5 h-5  rounded-full cursor-pointer outline-none"
+              className="w-5 h-5 rounded-full cursor-pointer outline-none text-white"
             />
             <Tooltip id="tooltip-close" />
           </div>
