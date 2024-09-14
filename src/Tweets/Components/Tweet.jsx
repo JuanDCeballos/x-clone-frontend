@@ -1,30 +1,29 @@
-import { useEffect, useRef, useState } from "react";
-import { Tooltip } from "react-tooltip";
-import { PiUserCircleThin } from "react-icons/pi";
-import { BiWorld, BiPoll } from "react-icons/bi";
-import { GoFileMedia } from "react-icons/go";
-import { MdOutlineGifBox } from "react-icons/md";
-import { HiOutlineEmojiHappy } from "react-icons/hi";
-import { RiCalendarScheduleLine } from "react-icons/ri";
-import { IoLocationOutline } from "react-icons/io5";
+import { useEffect, useRef, useState } from 'react';
+import { Tooltip } from 'react-tooltip';
+import { PiUserCircleThin } from 'react-icons/pi';
+import { BiWorld, BiPoll } from 'react-icons/bi';
+import { GoFileMedia } from 'react-icons/go';
+import { MdOutlineGifBox } from 'react-icons/md';
+import { HiOutlineEmojiHappy } from 'react-icons/hi';
+import { RiCalendarScheduleLine } from 'react-icons/ri';
+import { IoLocationOutline } from 'react-icons/io5';
 
-const Tweet = () => {
+export const Tweet = () => {
   const textAreaRef = useRef();
 
-  const [textAreaVal, setTextAreaVal] = useState("");
+  const [textAreaVal, setTextAreaVal] = useState('');
 
   const onTextAreaChange = (e) => {
     setTextAreaVal(e.target.value);
   };
 
   useEffect(() => {
-    textAreaRef.current.style.height = "auto";
-    textAreaRef.current.style.height = textAreaRef.current.scrollHeight + "px";
+    textAreaRef.current.style.height = 'auto';
+    textAreaRef.current.style.height = textAreaRef.current.scrollHeight + 'px';
   }, [textAreaVal]);
 
   return (
     <>
-      <h1>Tweet component</h1>
       <div className="flex px-4 border-2 border-red-600 w-[634px] min-h-[124px]">
         <div className="pt-3 mr-2">
           <PiUserCircleThin className="w-10 h-10 text-5xl" />
@@ -45,7 +44,7 @@ const Tweet = () => {
             <div className="flex pb-3  text-sky-500  cursor-pointer">
               <a className="flex items-center space-x-2">
                 <BiWorld className="w-4 h-4" />
-                <span className="text-sm font-medium">Everyone can reply</span>
+                <span className="text-sm font-bold">Everyone can reply</span>
               </a>
             </div>
             <hr />
@@ -101,7 +100,10 @@ const Tweet = () => {
                 <Tooltip id="tooltip-location" />
               </div>
               <div>
-                <button className="min-h-9 min-w-9 rounded-t-full rounded-b-full bg-sky-500 hover:bg-sky-600 duration-200 outline-none  px-4 text-white font-black">
+                <button
+                  className="min-h-9 min-w-9 rounded-t-full rounded-b-full bg-sky-500 hover:bg-sky-600 duration-200 outline-none px-4 text-white font-bold
+                  text-sm"
+                >
                   Post
                 </button>
               </div>
@@ -112,5 +114,3 @@ const Tweet = () => {
     </>
   );
 };
-
-export default Tweet;
