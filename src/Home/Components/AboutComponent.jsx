@@ -1,4 +1,4 @@
-import { SearchBarComponent } from "./SearchBarComponent";
+import { SearchBarComponent } from './SearchBarComponent';
 
 export const AboutComponent = () => {
   return (

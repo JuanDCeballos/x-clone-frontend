@@ -1,25 +1,25 @@
-import { useEffect, useRef, useState } from 'react';
-import { Tooltip } from 'react-tooltip';
-import { PiUserCircleThin } from 'react-icons/pi';
-import { BiWorld, BiPoll } from 'react-icons/bi';
-import { GoFileMedia } from 'react-icons/go';
-import { MdOutlineGifBox } from 'react-icons/md';
-import { HiOutlineEmojiHappy } from 'react-icons/hi';
-import { RiCalendarScheduleLine } from 'react-icons/ri';
-import { IoLocationOutline } from 'react-icons/io5';
+import { useEffect, useRef, useState } from "react";
+import { Tooltip } from "react-tooltip";
+import { PiUserCircleThin } from "react-icons/pi";
+import { BiWorld, BiPoll } from "react-icons/bi";
+import { GoFileMedia } from "react-icons/go";
+import { MdOutlineGifBox } from "react-icons/md";
+import { HiOutlineEmojiHappy } from "react-icons/hi";
+import { RiCalendarScheduleLine } from "react-icons/ri";
+import { IoLocationOutline } from "react-icons/io5";
 
 const Tweet = () => {
   const textAreaRef = useRef();
 
-  const [textAreaVal, setTextAreaVal] = useState('');
+  const [textAreaVal, setTextAreaVal] = useState("");
 
   const onTextAreaChange = (e) => {
     setTextAreaVal(e.target.value);
   };
 
   useEffect(() => {
-    textAreaRef.current.style.height = 'auto';
-    textAreaRef.current.style.height = textAreaRef.current.scrollHeight + 'px';
+    textAreaRef.current.style.height = "auto";
+    textAreaRef.current.style.height = textAreaRef.current.scrollHeight + "px";
   }, [textAreaVal]);
 
   return (
