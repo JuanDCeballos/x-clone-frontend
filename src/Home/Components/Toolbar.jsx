@@ -17,7 +17,7 @@ import { SidebarIcon } from './../../Common/Components';
 export const Toolbar = () => {
   return (
     <>
-      <div className="flex flex-col justify-start items-center w-16 h-screen p-2 bg-black">
+      <div className="flex flex-col pr-8 justify-start items-end w-[395px] h-screen p-2 bg-black">
         <div className="p-2 hover:bg-gray-800 rounded-full cursor-pointer mb-4">
           <FaXTwitter className="h-8 w-8 text-white" />
         </div>
