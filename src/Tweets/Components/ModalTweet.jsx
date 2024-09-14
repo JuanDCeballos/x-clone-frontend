@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import ReactModal from 'react-modal';
 import { Tooltip } from 'react-tooltip';
 import { Tweet } from './Tweet';
@@ -6,22 +5,12 @@ import { IoMdClose } from 'react-icons/io';
 
 ReactModal.setAppElement(document.getElementById('root'));
 
-export const ModalTweet = () => {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-
-  const openModal = () => {
-    setModalIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalIsOpen(false);
-  };
-
+export const ModalTweet = ({ isOpen, closeModal }) => {
   return (
     <>
-      <button onClick={openModal}>Tweet</button>
+      |
       <ReactModal
-        isOpen={modalIsOpen}
+        isOpen={isOpen}
         onRequestClose={closeModal}
         style={{
           content: {
