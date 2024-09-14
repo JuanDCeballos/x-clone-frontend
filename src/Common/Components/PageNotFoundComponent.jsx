@@ -9,7 +9,7 @@ export const PageNotFoundComponent = () => {
             We couldn't find this site
           </p>
           <button className="bg-white mt-2 rounded-full w-3/4 h-8 font-semibold hover:bg-gray-200 mb-6">
-            Ir al Inicio
+            Go Home
           </button>
         </div>
       </div>

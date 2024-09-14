@@ -1,47 +1,56 @@
 import {
-  FaTwitter,
-  FaHome,
-  FaHashtag,
-  FaBell,
-  FaEnvelope,
-  FaBookmark,
-  FaList,
-  FaUser,
-  FaEllipsisH,
-  FaFeather,
-} from "react-icons/fa";
+  GoHomeFill,
+  GoSearch,
+  GoBell,
+  GoMail,
+  GoBookmark,
+  GoPerson,
+} from 'react-icons/go';
+import { BsSlashSquare, BsFeather } from 'react-icons/bs';
+import { PiDotsThreeCircleLight } from 'react-icons/pi';
+import {} from 'react-icons/bs';
+import { ModalTweet } from './../../Tweets/Components';
+import { FaXTwitter } from 'react-icons/fa6';
+import { SidebarIcon } from './../../Common/Components';
+import { useState } from 'react';
 
-const SidebarIcon = ({ Icon, text }) => (
-  <div className="flex items-center space-x-4 p-2 hover:bg-gray-800 rounded-full cursor-pointer group">
-    <Icon className="h-7 w-7 text-white group-hover:text-blue-400" />
-    <span className="hidden xl:inline text-white group-hover:text-blue-400">
-      {text}
-    </span>
-  </div>
-);
+export const Toolbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
 
-const Toolbar = () => {
+  const openModal = () => {
+    setIsOpen((prevState) => !prevState);
+  };
+
+  const closeModal = () => {
+    setIsOpen((prevState) => !prevState);
+  };
+
   return (
-    <div className="h-screen-full p-2 bg-black">
-      <div className="p-2 hover:bg-gray-800 rounded-full cursor-pointer mb-4">
-        <FaTwitter className="h-8 w-8 text-blue-400" />
+    <>
+      {/* <ModalTweet isOpen={isOpen} closeModal={closeModal} /> */}
+      <div className="flex flex-col pr-8 justify-start items-end w-[395px] min-h-full p-2 bg-black">
+        <div className="p-2 hover:bg-gray-800 rounded-full cursor-pointer mb-4">
+          <FaXTwitter className="h-8 w-8 text-white" />
+        </div>
+
+        <div className="space-y-2">
+          <SidebarIcon Icon={GoHomeFill} />
+          <SidebarIcon Icon={GoSearch} />
+          <SidebarIcon Icon={GoBell} />
+          <SidebarIcon Icon={GoMail} />
+          <SidebarIcon Icon={GoBookmark} />
+          <SidebarIcon Icon={BsSlashSquare} />
+          <SidebarIcon Icon={GoPerson} />
+          <SidebarIcon Icon={PiDotsThreeCircleLight} />
+        </div>
+
+        <button
+          className="w-10 bg-blue-400 text-white rounded-full shadow-lg hover:bg-blue-500 transition duration-200 mt-4 p-2"
+          onClick={() => openModal}
+        >
+          <BsFeather className="h-6 w-6" />
+        </button>
       </div>
-
-      <SidebarIcon Icon={FaHome} text="Home" />
-      <SidebarIcon Icon={FaHashtag} text="Explore" />
-      <SidebarIcon Icon={FaBell} text="Notifications" />
-      <SidebarIcon Icon={FaEnvelope} text="Messages" />
-      <SidebarIcon Icon={FaBookmark} text="Bookmarks" />
-      <SidebarIcon Icon={FaList} text="Lists" />
-      <SidebarIcon Icon={FaUser} text="Profile" />
-      <SidebarIcon Icon={FaEllipsisH} text="More" />
-
-      <button className="bg-blue-400 text-white rounded-full text-lg font-bold shadow-lg hover:bg-blue-500 transition duration-200 mt-4 p-2">
-        <FaFeather className="h-6 w-6" />
-        <span className="hidden xl:inline">Tweet</span>
-      </button>
-    </div>
+    </>
   );
 };
-
-export default Toolbar;

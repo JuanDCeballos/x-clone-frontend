@@ -1,4 +1,4 @@
-import { FaApple, FaGoogle } from "react-icons/fa";
+import { FaApple, FaGoogle } from 'react-icons/fa';
 
 export const LogInComponent = () => {
   return (

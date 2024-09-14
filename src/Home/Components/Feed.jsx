@@ -1,24 +1,24 @@
-import Post from './Post';
+import { Tweet, Post } from '../../Tweets/Components';
 
-const Feed = () => {
+export const Feed = () => {
   return (
     <>
-      <h1>Feed component</h1>
-      <div className="border-2 border-red-600 w-[634px]">
-        <div className="flex text-center">
+      <div className="w-[634px]">
+        <div className="border-l-2 border-r-2 border-b-2 flex text-center h-11  items-center justify-center">
           <div className="flex-1 cursor-pointer">
             <span>For you</span>
-            <div className="border-b-4 rounded-b-full rounded-t-full border-sky-500"></div>
           </div>
+          <div className="border-2 min-h-full rounded-b-full rounded-t-full border-gray-400"></div>
           <div className="flex-1 cursor-pointer">
             <span>Following</span>
-            <div className="border-b-4 rounded-b-full rounded-t-full border-sky-500"></div>
           </div>
         </div>
+        <Tweet />
+        <Post />
+        <Post />
+        <Post />
         <Post />
       </div>
     </>
   );
 };
-
-export default Feed;

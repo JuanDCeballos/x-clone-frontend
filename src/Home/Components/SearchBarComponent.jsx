@@ -1,9 +1,9 @@
-import { IoSearch } from "react-icons/io5";
+import { IoSearch } from 'react-icons/io5';
 
 export const SearchBarComponent = () => {
   return (
     <>
-      <div className="w-full">
+      <div className="w-[350px] ml-4 pt-2">
         <div className="flex flex-row justify-start items-center bg-[rgb(47,50,53)] w-11/12 rounded-2xl">
           <IoSearch className="text-white text-xl cursor-pointer ml-4" />
           <input

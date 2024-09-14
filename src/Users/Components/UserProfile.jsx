@@ -1,15 +1,15 @@
-import { FaArrowLeft, FaCalendarAlt, FaCheckCircle } from "react-icons/fa";
+import { FaArrowLeft, FaCalendarAlt, FaCheckCircle } from 'react-icons/fa';
 
-const UserProfile = () => {
+export const UserProfile = () => {
   const user = {
-    name: "Pedro el escamoso",
-    username: "Pedro010003",
-    joinDate: "June 2023",
+    name: 'Pedro el escamoso',
+    username: 'Pedro010003',
+    joinDate: 'June 2023',
     postsCount: 1,
     following: 10,
     followers: 0,
     profileImage:
-      "https://community-lens.storage.googleapis.com/preview-media/thumbnail_poster/b501ad7e-e56b-4895-ad80-8abb5320510d.jpg",
+      'https://community-lens.storage.googleapis.com/preview-media/thumbnail_poster/b501ad7e-e56b-4895-ad80-8abb5320510d.jpg',
     verified: true,
   };
 
@@ -58,14 +58,14 @@ const UserProfile = () => {
       </div>
 
       <div className="flex border-b border-gray-800">
-        {["Posts", "Replies", "Highlights", "Articles", "Media", "Likes"].map(
+        {['Posts', 'Replies', 'Highlights', 'Articles', 'Media', 'Likes'].map(
           (tab, index) => (
             <button
               key={index}
               className={`flex-1 py-4 hover:bg-gray-800 ${
                 index === 0
-                  ? "border-b-2 border-blue-400 font-bold"
-                  : "text-gray-500"
+                  ? 'border-b-2 border-blue-400 font-bold'
+                  : 'text-gray-500'
               }`}
             >
               {tab}
@@ -80,5 +80,3 @@ const UserProfile = () => {
     </div>
   );
 };
-
-export default UserProfile;

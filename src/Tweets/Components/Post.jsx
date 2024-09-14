@@ -7,11 +7,10 @@ import { CiHeart, CiBookmark } from 'react-icons/ci';
 import { BiBarChart } from 'react-icons/bi';
 import { RiShare2Line } from 'react-icons/ri';
 
-const Post = () => {
+export const Post = () => {
   return (
     <>
-      <h1>Post component</h1>
-      <div className="flex px-4 border-2 border-red-600 w-[634px] min-h-[124px]">
+      <div className="flex px-4 border-2 w-[634px] min-h-[124px]">
         <div className="pt-3 mr-2">
           <PiUserCircleThin className="w-10 h-10 text-5xl" />
         </div>
@@ -107,5 +106,3 @@ const Post = () => {
     </>
   );
 };
-
-export default Post;
