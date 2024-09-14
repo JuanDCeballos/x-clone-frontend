@@ -10,7 +10,7 @@ import { RiShare2Line } from 'react-icons/ri';
 export const Post = () => {
   return (
     <>
-      <div className="flex px-4 border-2 w-[634px] min-h-[124px]">
+      <div className="flex px-4 border-l-2 border-r-2 border-b-2 w-[634px] min-h-[124px]">
         <div className="pt-3 mr-2">
           <PiUserCircleThin className="w-10 h-10 text-5xl" />
         </div>
