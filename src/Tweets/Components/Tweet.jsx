@@ -31,7 +31,7 @@ export const Tweet = () => {
         <div className="flex-1 flex flex-col justify-center pt-2">
           <div className="py-3">
             <textarea
-              className="resize-none border-none outline-0 text-custom w-[515px]"
+              className="resize-none border-none outline-0 text-custom w-[515px] bg-black"
               placeholder="What is happening?!"
               value={textAreaVal}
               onChange={onTextAreaChange}
