@@ -24,7 +24,7 @@ export const Tweet = () => {
 
   return (
     <>
-      <div className="flex px-4 border-2  w-[634px] min-h-[124px]">
+      <div className="flex px-4 border-2 w-[634px] min-h-[124px] bg-black text-white">
         <div className="pt-3 mr-2">
           <PiUserCircleThin className="w-10 h-10 text-5xl" />
         </div>
