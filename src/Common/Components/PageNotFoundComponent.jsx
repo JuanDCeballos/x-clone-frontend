@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export const PageNotFoundComponent = () => {
   return (
     <>
@@ -8,9 +10,12 @@ export const PageNotFoundComponent = () => {
           <p className="text-white font-extrabold text-xl mb-4">
             We couldn't find this site
           </p>
-          <button className="bg-white mt-2 rounded-full w-3/4 h-8 font-semibold hover:bg-gray-200 mb-6">
+          <Link
+            to="feed"
+            className="bg-white mt-2 rounded-full w-3/4 h-8 font-semibold hover:bg-gray-200 mb-6 text-center"
+          >
             Go Home
-          </button>
+          </Link>
         </div>
       </div>
     </>
