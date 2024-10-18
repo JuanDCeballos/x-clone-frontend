@@ -1,4 +1,5 @@
-import { AboutComponent, Feed, Toolbar } from './Home/Components';
+import { Outlet } from 'react-router-dom';
+import { AboutComponent, Toolbar } from './Home/Components';
 
 function App() {
   return (
@@ -6,9 +7,9 @@ function App() {
       <div className="flex">
         <Toolbar />
         <div className="flex-1 flex bg-black text-white">
-          <Feed />
-          <AboutComponent />
+          <Outlet />
         </div>
+        <AboutComponent />
       </div>
     </>
   );
