@@ -1,4 +1,5 @@
 import { FaApple, FaGoogle } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 export const LogInComponent = () => {
   return (
@@ -48,9 +49,12 @@ export const LogInComponent = () => {
               <FaApple className="text-3xl mr-5" />
             </button>
           </div>
-          <button className="bg-[rgb(29,155,240)]  mt-6 rounded-full w-2/4 h-11 flex flex-row items-center justify-center font-semibold text-white hover:bg-[rgb(27,137,211)]">
+          <Link
+            to="/register"
+            className="bg-[rgb(29,155,240)]  mt-6 rounded-full w-2/4 h-11 flex flex-row items-center justify-center font-semibold text-white hover:bg-[rgb(27,137,211)]"
+          >
             Create account
-          </button>
+          </Link>
         </div>
       </div>
     </>
