@@ -1,19 +1,27 @@
-import React from 'react';
-import { FaTimes, FaUser, FaAt, FaLock, FaFileAlt, FaCamera } from 'react-icons/fa';
+import {
+  FaTimes,
+  FaUser,
+  FaAt,
+  FaLock,
+  FaFileAlt,
+  FaCamera,
+} from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 export const UserRegister = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-900 p-4">
-      <div 
+      <div
         className="absolute inset-0 bg-cover bg-center opacity-20"
         style={{
-          backgroundImage: "url('https://about.x.com/content/dam/about-twitter/x/large-x-logo.png.twimg.1920.png')"
+          backgroundImage:
+            "url('https://about.x.com/content/dam/about-twitter/x/large-x-logo.png.twimg.1920.png')",
         }}
       ></div>
       <div className="bg-black bg-opacity-80 rounded-lg w-full max-w-xl relative z-10 overflow-hidden">
         <div className="p-6">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-bold text-white">Crea tu cuenta</h2>
+            <h2 className="text-xl font-bold text-white">Create an account</h2>
             <button className="text-gray-400 hover:text-white">
               <FaTimes size={20} />
             </button>
@@ -73,11 +81,13 @@ export const UserRegister = () => {
               type="submit"
               className="w-full bg-white text-black font-bold py-2 px-4 rounded-full hover:bg-gray-200 transition duration-200"
             >
-              Registrarse
+              Register
             </button>
           </form>
           <div className="mt-4 text-center">
-            <a href="#" className="text-blue-400 text-sm">¿Ya tienes una cuenta?</a>
+            <Link to="/login" href="#" className="text-blue-400 text-sm">
+              Already have an account?
+            </Link>
           </div>
         </div>
       </div>
