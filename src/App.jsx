@@ -4,11 +4,9 @@ import { AboutComponent, Toolbar } from './Home/Components';
 function App() {
   return (
     <>
-      <div className="flex">
+      <div className="flex bg-black text-white">
         <Toolbar />
-        <div className="flex-1 flex bg-black text-white">
-          <Outlet />
-        </div>
+        <Outlet />
         <AboutComponent />
       </div>
     </>
