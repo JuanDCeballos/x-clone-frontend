@@ -4,7 +4,7 @@ import {
   PageNotFoundComponent,
   UnderConstructionComponent,
 } from '../Common/Components';
-import { UserProfile } from '../Users/Components/UserProfile';
+import { UserProfile, UserRegister } from '../Users/Components/index';
 import { Feed } from '../Home/Components';
 import { LogInComponent, LogOutComponent } from '../LogIn/Components/index';
 // import ProtectedRoute from './ProtectedRoute';
@@ -33,6 +33,10 @@ const routes = createBrowserRouter([
   {
     path: 'logout',
     element: <LogOutComponent />,
+  },
+  {
+    path: 'register',
+    element: <UserRegister />,
   },
 ]);
 
