@@ -8,6 +8,7 @@ import { UserProfile, UserRegister } from '../Users/Components/index';
 import { Feed } from '../Home/Components';
 import { LogInComponent, LogOutComponent } from '../LogIn/Components/index';
 // import ProtectedRoute from './ProtectedRoute';
+import { LogInProvider } from '../LogIn/Context';
 
 const routes = createBrowserRouter([
   {
@@ -28,7 +29,11 @@ const routes = createBrowserRouter([
   },
   {
     path: 'login',
-    element: <LogInComponent />,
+    element: (
+      <LogInProvider>
+        <LogInComponent />,
+      </LogInProvider>
+    ),
   },
   {
     path: 'logout',
