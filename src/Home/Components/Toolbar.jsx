@@ -29,7 +29,7 @@ export const Toolbar = () => {
   return (
     <>
       <ModalTweet isOpen={isOpen} closeModal={closeModal} />
-      <div className="flex flex-col pr-8 justify-start items-end w-[395px] min-h-full p-2 bg-black">
+      <div className="flex flex-col pr-8 justify-start items-end w-full min-h-full p-2 bg-black">
         <div className="p-2 hover:bg-gray-800 rounded-full cursor-pointer mb-4">
           <Link to="feed">
             <FaXTwitter className="h-8 w-8 text-white" />

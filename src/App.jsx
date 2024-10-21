@@ -5,9 +5,15 @@ function App() {
   return (
     <>
       <div className="flex bg-black text-white">
-        <Toolbar />
-        <Outlet />
-        <AboutComponent />
+        <div className="flex-1">
+          <Toolbar />
+        </div>
+        <div className="flex-1">
+          <Outlet />
+        </div>
+        <div className="flex-1">
+          <AboutComponent />
+        </div>
       </div>
     </>
   );
