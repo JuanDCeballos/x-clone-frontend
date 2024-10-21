@@ -1,7 +1,23 @@
+import { useState } from 'react';
 import { FaApple, FaGoogle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { LogInWithUserName, LogInWithEmail } from '../Controller';
 
 export const LogInComponent = () => {
+  const [PassWord, SetPassWord] = useState('');
+  const [User, SetUser] = useState('');
+
+  async function LogIn() {
+    let result;
+    if (User.includes('@')) {
+      result = await LogInWithEmail(User, PassWord);
+    } else {
+      result = await LogInWithUserName(User, PassWord);
+    }
+
+    console.log(result);
+  }
+
   return (
     <>
       <div className="flex flex-row items-center justify-center bg-black min-h-screen">
@@ -26,6 +42,9 @@ export const LogInComponent = () => {
                 id="email-userName"
                 placeholder="Email or user name"
                 className="border border-[rgb(29,155,240)] bg-black h-11 pl-2 focus:outline-none rounded"
+                onChange={(e) => {
+                  SetUser(e.target.value);
+                }}
               />
               <label htmlFor="password">Password</label>
               <input
@@ -34,9 +53,15 @@ export const LogInComponent = () => {
                 id="password"
                 placeholder="Password"
                 className="border border-[rgb(29,155,240)] bg-black h-11 pl-2 focus:outline-none rounded"
+                onChange={(e) => {
+                  SetPassWord(e.target.value);
+                }}
               />
             </div>
-            <button className="bg-[rgb(29,155,240)]  mt-6 rounded-full w-2/4 h-11 flex flex-row items-center justify-center font-semibold text-white hover:bg-[rgb(27,137,211)]">
+            <button
+              className="bg-[rgb(29,155,240)]  mt-6 rounded-full w-2/4 h-11 flex flex-row items-center justify-center font-semibold text-white hover:bg-[rgb(27,137,211)]"
+              onClick={LogIn}
+            >
               Sign in
             </button>
           </div>
