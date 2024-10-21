@@ -1,13 +1,16 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { FaApple, FaGoogle } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { LogInWithUserName, LogInWithEmail } from '../Controller';
+import { LogInContext } from '../Context/LogInContext';
 
 export const LogInComponent = () => {
   const [PassWord, SetPassWord] = useState('');
   const [User, SetUser] = useState('');
+  const { LogIn } = useContext(LogInContext);
+  const navigate = useNavigate();
 
-  async function LogIn() {
+  async function OnLogIn() {
     let result;
     if (User.includes('@')) {
       result = await LogInWithEmail(User, PassWord);
@@ -15,7 +18,10 @@ export const LogInComponent = () => {
       result = await LogInWithUserName(User, PassWord);
     }
 
-    console.log(result);
+    if (result.ok) {
+      LogIn(result.Token);
+      navigate('/feed', { replace: true });
+    }
   }
 
   return (
@@ -60,7 +66,7 @@ export const LogInComponent = () => {
             </div>
             <button
               className="bg-[rgb(29,155,240)]  mt-6 rounded-full w-2/4 h-11 flex flex-row items-center justify-center font-semibold text-white hover:bg-[rgb(27,137,211)]"
-              onClick={LogIn}
+              onClick={OnLogIn}
             >
               Sign in
             </button>
