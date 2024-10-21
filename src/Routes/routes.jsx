@@ -7,18 +7,17 @@ import {
 import { UserProfile, UserRegister } from '../Users/Components/index';
 import { Feed } from '../Home/Components';
 import { LogInComponent, LogOutComponent } from '../LogIn/Components/index';
-// import ProtectedRoute from './ProtectedRoute';
-import { LogInProvider } from '../LogIn/Context';
+import { PrivateRouter } from './PrivateRoute';
+import { PublicRouter } from './PublicRoute';
 
 const routes = createBrowserRouter([
   {
     path: '/',
-    // element: (
-    //   <ProtectedRoute>
-    //     <App />
-    //   </ProtectedRoute>
-    // ),
-    element: <App />,
+    element: (
+      <PrivateRouter>
+        <App />
+      </PrivateRouter>
+    ),
     errorElement: <PageNotFoundComponent />,
     // Verifiar si estas rutas al ser hijas de una ruta protected "Heredan ese comportamienot" o tambien se les debe poner la ruta protected
     children: [
@@ -30,18 +29,26 @@ const routes = createBrowserRouter([
   {
     path: 'login',
     element: (
-      <LogInProvider>
+      <PublicRouter>
         <LogInComponent />,
-      </LogInProvider>
+      </PublicRouter>
     ),
   },
   {
     path: 'logout',
-    element: <LogOutComponent />,
+    element: (
+      <PrivateRouter>
+        <LogOutComponent />,
+      </PrivateRouter>
+    ),
   },
   {
     path: 'register',
-    element: <UserRegister />,
+    element: (
+      <PublicRouter>
+        <UserRegister />,
+      </PublicRouter>
+    ),
   },
 ]);
 
