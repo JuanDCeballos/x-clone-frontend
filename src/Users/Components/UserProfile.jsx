@@ -1,4 +1,5 @@
 import { FaArrowLeft, FaCalendarAlt, FaCheckCircle } from 'react-icons/fa';
+import { Feed } from '../../Home/Components';
 
 export const UserProfile = () => {
   const user = {
@@ -14,7 +15,7 @@ export const UserProfile = () => {
   };
 
   return (
-    <div className=" bg-black text-white w-[6000px] ">
+    <div className=" bg-black text-white w-[634px]">
       <div className="flex items-center p-4 border-b border-gray-800">
         <FaArrowLeft className="mr-8 cursor-pointer" />
         <div>
@@ -77,6 +78,7 @@ export const UserProfile = () => {
       <div className="p-4">
         <h2 className="font-bold text-xl">Who to follow</h2>
       </div>
+      <Feed />
     </div>
   );
 };

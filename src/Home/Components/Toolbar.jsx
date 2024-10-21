@@ -13,6 +13,7 @@ import { ModalTweet } from './../../Tweets/Components';
 import { FaXTwitter } from 'react-icons/fa6';
 import { SidebarIcon } from './../../Common/Components';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export const Toolbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,20 +29,38 @@ export const Toolbar = () => {
   return (
     <>
       <ModalTweet isOpen={isOpen} closeModal={closeModal} />
-      <div className="flex flex-col pr-8 justify-start items-end w-[395px] min-h-full p-2 bg-black">
+      <div className="flex flex-col pr-8 justify-start items-end w-full min-h-full p-2 bg-black">
         <div className="p-2 hover:bg-gray-800 rounded-full cursor-pointer mb-4">
-          <FaXTwitter className="h-8 w-8 text-white" />
+          <Link to="feed">
+            <FaXTwitter className="h-8 w-8 text-white" />
+          </Link>
         </div>
 
         <div className="space-y-2">
-          <SidebarIcon Icon={GoHomeFill} />
-          <SidebarIcon Icon={GoSearch} />
-          <SidebarIcon Icon={GoBell} />
-          <SidebarIcon Icon={GoMail} />
-          <SidebarIcon Icon={GoBookmark} />
-          <SidebarIcon Icon={BsSlashSquare} />
-          <SidebarIcon Icon={GoPerson} />
-          <SidebarIcon Icon={PiDotsThreeCircleLight} />
+          <Link to="feed">
+            <SidebarIcon Icon={GoHomeFill} />
+          </Link>
+          <Link to="underConstruction">
+            <SidebarIcon Icon={GoSearch} />
+          </Link>
+          <Link to="underConstruction">
+            <SidebarIcon Icon={GoBell} />
+          </Link>
+          <Link to="underConstruction">
+            <SidebarIcon Icon={GoMail} />
+          </Link>
+          <Link to="underConstruction">
+            <SidebarIcon Icon={GoBookmark} />
+          </Link>
+          <Link to="underConstruction">
+            <SidebarIcon Icon={BsSlashSquare} />
+          </Link>
+          <Link to="profile">
+            <SidebarIcon Icon={GoPerson} />
+          </Link>
+          <Link to="underConstruction">
+            <SidebarIcon Icon={PiDotsThreeCircleLight} />
+          </Link>
         </div>
 
         <button

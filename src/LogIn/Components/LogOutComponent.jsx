@@ -7,18 +7,18 @@ export const LogOutComponent = () => {
           <div className="border-2 border-b-white rounded-full w-2/4 mb-4"></div>
           <div className="flex- flex-col items-start ">
             <p className="text-white font-semibold text-xl mt-2 mb-4 ml-6">
-              ¿Salir de X?
+              Log out of X?
             </p>
             <p className="text-gray-400 text-base mb-4 ml-6 mr-6">
-              Siempre puedes volver. Si solamente quieres cambiar de cuenta,
-              puedes hacerlo añadiendo la cuenta existente.
+              You can always log back in at any time. If you just want to switch
+              accounts, you can do that by adding an existing account.
             </p>
           </div>
           <button className="bg-white mt-2 rounded-full w-3/4 h-8 font-semibold hover:bg-gray-200">
-            Salir
+            Log out
           </button>
           <button className="bg-black mt-4 mb-6 rounded-full w-3/4 h-8 border-solid border-2 border-gray-500 font-semibold hover:bg-gray-900 text-white">
-            Cancelar
+            Cancel
           </button>
         </div>
       </div>
