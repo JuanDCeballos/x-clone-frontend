@@ -23,7 +23,13 @@ export const UserRegister = () => {
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-bold text-white">Create an account</h2>
             <button className="text-gray-400 hover:text-white">
-              <FaTimes size={20} />
+              <Link
+                to="/login"
+                href="#"
+                className="hover:text-blue-400 text-sm"
+              >
+                <FaTimes size={20} />
+              </Link>
             </button>
           </div>
         </div>
