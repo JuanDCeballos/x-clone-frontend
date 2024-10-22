@@ -1,32 +1,25 @@
 import axios from 'axios';
 
-export async function CreateUser(
-  Name,
-  UserName,
-  Email,
-  PassWord,
-  Description,
-  PhotoURL
-) {
+export async function CreateUser(userData) {
   try {
-    if (!Name) throw new Error('Name is empty.');
-    if (!UserName) throw new Error('User Name is empty.');
-    if (!Email) throw new Error('Email is empty.');
-    if (!PassWord) throw new Error('Password is empty.');
-    if (!Description) throw new Error('Description is empty.');
-    if (!PhotoURL) throw new Error('Photo is empty');
+    if (!userData.Name) throw new Error('Name is empty.');
+    if (!userData.UserName) throw new Error('User Name is empty.');
+    if (!userData.Email) throw new Error('Email is empty.');
+    if (!userData.PassWord) throw new Error('Password is empty.');
+    if (!userData.Description) throw new Error('Description is empty.');
+    if (!userData.PhotoURL) throw new Error('Photo is empty');
 
     const result = await axios.post('http://localhost:1234/api/v1/User', {
       headers: {
         'Content-Type': 'application/json',
       },
 
-      Name: Name,
-      UserName: UserName,
-      Email: Email,
-      PassWord: PassWord,
-      Description: Description,
-      Photo: PhotoURL,
+      Name: userData.Name,
+      UserName: userData.UserName,
+      Email: userData.Email,
+      PassWord: userData.PassWord,
+      Description: userData.Description,
+      Photo: userData.PhotoURL,
     });
 
     return { ok: true, Token: result.data?.AccessToken };
