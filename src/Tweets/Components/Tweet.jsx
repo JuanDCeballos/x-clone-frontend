@@ -7,12 +7,14 @@ import { MdOutlineGifBox } from 'react-icons/md';
 import { HiOutlineEmojiHappy } from 'react-icons/hi';
 import { RiCalendarScheduleLine } from 'react-icons/ri';
 import { IoLocationOutline } from 'react-icons/io5';
+import { CreatePost } from '../Controller';
+import { LogInContext } from '../../LogIn/Context';
+import { useContext } from 'react';
 
 export const Tweet = () => {
+  const { User } = useContext(LogInContext);
   const textAreaRef = useRef();
-
   const [textAreaVal, setTextAreaVal] = useState('');
-
   const onTextAreaChange = (e) => {
     setTextAreaVal(e.target.value);
   };
@@ -21,6 +23,11 @@ export const Tweet = () => {
     textAreaRef.current.style.height = 'auto';
     textAreaRef.current.style.height = textAreaRef.current.scrollHeight + 'px';
   }, [textAreaVal]);
+
+  const OnCreate = async () => {
+    const result = await CreatePost(textAreaVal, User);
+    if (result.ok) console.log('Post creado..');
+  };
 
   return (
     <>
@@ -103,6 +110,7 @@ export const Tweet = () => {
                 <button
                   className="min-h-9 min-w-9 rounded-t-full rounded-b-full bg-sky-500 hover:bg-sky-600 duration-200 outline-none px-4 text-white font-bold
                   text-sm"
+                  onClick={OnCreate}
                 >
                   Post
                 </button>
