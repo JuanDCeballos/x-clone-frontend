@@ -20,6 +20,7 @@ export async function CreateUser(
       headers: {
         'Content-Type': 'application/json',
       },
+
       Name: Name,
       UserName: UserName,
       Email: Email,
