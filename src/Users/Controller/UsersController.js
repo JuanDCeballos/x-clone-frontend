@@ -35,3 +35,21 @@ export async function CreateUser(
     return { ok: false };
   }
 }
+
+export async function GetUserDataByUID(UserUID) {
+  try {
+    if (!UserUID) throw new Error('UserUID is empty.');
+
+    const result = await axios.get('http://localhost:1234/api/v1/User', {
+      headers: {
+        authorization: UserUID,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    return result;
+  } catch (error) {
+    console.error(error);
+    return { ok: false };
+  }
+}
