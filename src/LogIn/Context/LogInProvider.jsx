@@ -17,7 +17,7 @@ export const LogInProvider = ({ children }) => {
   const [LogInState, dispatch] = useReducer(LogInReducer, initialState, init);
 
   function LogIn(token) {
-    const payload = { User: token };
+    const payload = token;
     const action = { type: LogInContextTypes.LogIn, payload };
     localStorage.setItem('User', JSON.stringify(token));
     dispatch(action);
