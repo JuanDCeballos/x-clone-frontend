@@ -7,8 +7,17 @@ import {
   FaCamera,
 } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { CreateUser } from '../Controller';
+import { LogInContext } from '../../LogIn/Context';
+import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
 
 export const UserRegister = () => {
+  const navigate = useNavigate();
+  const { LogIn } = useContext(LogInContext);
+
+  const OnRegister = async () => {};
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-900 p-4">
       <div
@@ -86,6 +95,7 @@ export const UserRegister = () => {
             <button
               type="submit"
               className="w-full bg-white text-black font-bold py-2 px-4 rounded-full hover:bg-gray-200 transition duration-200"
+              onClick={OnRegister}
             >
               Register
             </button>
