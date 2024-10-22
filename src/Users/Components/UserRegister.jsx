@@ -11,12 +11,26 @@ import { CreateUser } from '../Controller';
 import { LogInContext } from '../../LogIn/Context';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
+import { useForm } from 'react-hook-form';
 
 export const UserRegister = () => {
   const navigate = useNavigate();
   const { LogIn } = useContext(LogInContext);
 
-  const OnRegister = async () => {};
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const OnRegister = async (userData) => {
+    let result = await CreateUser(userData);
+
+    if (result.ok) {
+      LogIn(result.Token);
+      navigate('/feed', { replace: true });
+    }
+  };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-900 p-4">
@@ -43,59 +57,114 @@ export const UserRegister = () => {
           </div>
         </div>
         <div className="max-h-[70vh] overflow-y-auto px-6 pb-6">
-          <form className="space-y-4">
+          <form onSubmit={handleSubmit(OnRegister)} className="space-y-4">
             <div className="relative">
               <FaUser className="absolute top-3 left-3 text-gray-400" />
               <input
+                {...register('Name', {
+                  required: true,
+                })}
                 type="text"
                 placeholder="Name"
                 className="w-full bg-gray-800 bg-opacity-50 text-white border border-gray-700 rounded-md p-2 pl-10 focus:outline-none focus:border-blue-500"
               />
+              {errors.Name && (
+                <p className="mt-2 text-red-500 text-xs">
+                  This field is required
+                </p>
+              )}
             </div>
             <div className="relative">
               <FaAt className="absolute top-3 left-3 text-gray-400" />
               <input
+                {...register('UserName', {
+                  required: true,
+                })}
                 type="text"
                 placeholder="UserName"
                 className="w-full bg-gray-800 bg-opacity-50 text-white border border-gray-700 rounded-md p-2 pl-10 focus:outline-none focus:border-blue-500"
               />
+              {errors.UserName && (
+                <p className="mt-2 text-red-500 text-xs">
+                  This field is required
+                </p>
+              )}
             </div>
             <div className="relative">
               <FaAt className="absolute top-3 left-3 text-gray-400" />
               <input
-                type="email"
+                {...register('Email', {
+                  required: 'Email is required',
+                  pattern: {
+                    value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                    message: 'Invalid email address',
+                  },
+                })}
                 placeholder="Email"
                 className="w-full bg-gray-800 bg-opacity-50 text-white border border-gray-700 rounded-md p-2 pl-10 focus:outline-none focus:border-blue-500"
               />
+              {errors.Email && (
+                <p className="mt-2 text-red-500 text-xs">
+                  {errors.Email.message}
+                </p>
+              )}
             </div>
             <div className="relative">
               <FaLock className="absolute top-3 left-3 text-gray-400" />
               <input
+                {...register('PassWord', {
+                  required: 'This field is required',
+                  minLength: {
+                    value: 8,
+                    message: 'Password should be 8 characters long',
+                  },
+                })}
                 type="password"
                 placeholder="Password"
                 className="w-full bg-gray-800 bg-opacity-50 text-white border border-gray-700 rounded-md p-2 pl-10 focus:outline-none focus:border-blue-500"
               />
+              {errors.PassWord && (
+                <p className="mt-2 text-red-500 text-xs">
+                  {errors.PassWord.message}
+                </p>
+              )}
             </div>
             <div className="relative">
               <FaFileAlt className="absolute top-3 left-3 text-gray-400" />
               <textarea
+                {...register('Description', {
+                  required: true,
+                })}
                 placeholder="Description"
                 className="w-full bg-gray-800 bg-opacity-50 text-white border border-gray-700 rounded-md p-2 pl-10 focus:outline-none focus:border-blue-500"
                 rows="3"
               ></textarea>
+              {errors.Description && (
+                <p className="mt-2 text-red-500 text-xs">
+                  This field is required
+                </p>
+              )}
             </div>
             <div className="relative">
               <FaCamera className="absolute top-3 left-3 text-gray-400" />
               <input
+                {...register('PhotoURL', {
+                  required: true,
+                })}
                 type="text"
                 placeholder="Photo"
                 className="w-full bg-gray-800 bg-opacity-50 text-white border border-gray-700 rounded-md p-2 pl-10 focus:outline-none focus:border-blue-500"
               />
+              {errors.PhotoURL && (
+                <p className="mt-2 text-red-500 text-xs">
+                  This field is required
+                </p>
+              )}
             </div>
             <button
               type="submit"
               className="w-full bg-white text-black font-bold py-2 px-4 rounded-full hover:bg-gray-200 transition duration-200"
-              onClick={OnRegister}
+              onClick={handleSubmit(OnRegister)}
             >
               Register
             </button>
