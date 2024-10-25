@@ -26,63 +26,69 @@ export const LogInComponent = () => {
 
   return (
     <>
-      <div className="flex flex-row items-center justify-center bg-black min-h-screen">
-        <div className="w-1/3">
-          <img className="size-auto" src="mainLogo.svg" />
+      <div className="flex flex-col md:flex-row items-center justify-center bg-black min-h-screen">
+        <div className="md:w-1/3 w-full flex justify-center mb-8 md:mb-0">
+          <img className="w-48" src="mainLogo.svg" alt="Main Logo" />
         </div>
-        <div className="w-2/4">
-          <div className="w-full">
-            <h3 className="font-extrabold text-white text-6xl">
+        <div className="md:w-1/3 w-full px-4">
+          <div className="w-full text-center md:text-left">
+            <h3 className="font-extrabold text-white text-5xl">
               Happening now
             </h3>
-            <p className="mt-16 font-extrabold text-white text-3xl">
+            <p className="mt-8 font-extrabold text-white text-2xl">
               Join today.
             </p>
           </div>
-          <div>
-            <div className="flex flex-col w-2/4 text-white gap-2 pt-2">
-              <label htmlFor="email-userName">Email or user name</label>
+          <div className="mt-8">
+            <div className="flex flex-col w-full text-white gap-4">
+              <label htmlFor="email-userName" className="text-sm">
+                Email or user name
+              </label>
               <input
                 type="text"
                 name="email"
                 id="email-userName"
                 placeholder="Email or user name"
-                className="border border-[rgb(29,155,240)] bg-black h-11 pl-2 focus:outline-none rounded"
+                className="border border-[rgb(29,155,240)] bg-black h-12 pl-4 focus:outline-none rounded-md"
                 onChange={(e) => {
                   SetUser(e.target.value);
                 }}
               />
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password" className="text-sm">
+                Password
+              </label>
               <input
                 type="password"
                 name="password"
                 id="password"
                 placeholder="Password"
-                className="border border-[rgb(29,155,240)] bg-black h-11 pl-2 focus:outline-none rounded"
+                className="border border-[rgb(29,155,240)] bg-black h-12 pl-4 focus:outline-none rounded-md"
                 onChange={(e) => {
                   SetPassWord(e.target.value);
                 }}
               />
             </div>
             <button
-              className="bg-[rgb(29,155,240)]  mt-6 rounded-full w-2/4 h-11 flex flex-row items-center justify-center font-semibold text-white hover:bg-[rgb(27,137,211)]"
+              className="bg-[rgb(29,155,240)] mt-6 rounded-full w-full h-12 flex items-center justify-center font-semibold text-white hover:bg-[rgb(27,137,211)] transition-colors duration-300"
               onClick={OnLogIn}
             >
               Sign in
             </button>
           </div>
-          <div className="mt-6 border-2 border-b-white rounded-full w-2/4"></div>
-          <div className="flex gap-1">
-            <button className="bg-white mt-6 rounded-full w-60 h-11 flex flex-row items-center justify-center font-semibold hover:bg-gray-200">
-              <FaGoogle className="text-2xl mr-4" />
+          <div className="mt-6 border-t-2 border-gray-600 w-full"></div>
+          <div className="flex flex-col md:flex-row gap-4 mt-6">
+            <button className="bg-white rounded-full w-full h-12 flex items-center justify-center font-semibold hover:bg-gray-200 transition-colors duration-300">
+              <FaGoogle className="text-xl mr-4" />
+              Sign in with Google
             </button>
-            <button className="bg-white mt-6 rounded-full w-60 h-11 flex flex-row items-center justify-center font-semibold hover:bg-gray-200">
-              <FaApple className="text-3xl mr-5" />
+            <button className="bg-white rounded-full w-full h-12 flex items-center justify-center font-semibold hover:bg-gray-200 transition-colors duration-300">
+              <FaApple className="text-xl mr-4" />
+              Sign in with Apple
             </button>
           </div>
           <Link
             to="/register"
-            className="bg-[rgb(29,155,240)]  mt-6 rounded-full w-2/4 h-11 flex flex-row items-center justify-center font-semibold text-white hover:bg-[rgb(27,137,211)]"
+            className="bg-[rgb(29,155,240)] mt-6 rounded-full w-full h-12 flex items-center justify-center font-semibold text-white hover:bg-[rgb(27,137,211)] transition-colors duration-300"
           >
             Create account
           </Link>
