@@ -14,7 +14,6 @@ export const ModalTweet = () => {
     <>
       <ReactModal
         isOpen={ModalIsOpen}
-        onRequestClose={!ModalIsOpen}
         style={{
           content: {
             top: '20%',
