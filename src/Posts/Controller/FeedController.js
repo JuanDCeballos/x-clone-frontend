@@ -50,3 +50,25 @@ export async function GetAllPosts(Token, LastPostId, LastPostCreatedAt) {
     return { ok: false };
   }
 }
+
+export const getPostById = async (token, postUID) => {
+  try {
+    if (!token) throw new Error('Token is empty.');
+    if (!postUID) throw new Error('postUID is empty.');
+
+    const result = await axios.get(
+      `http://localhost:1234/api/v1/Posts/${postUID}`,
+      {
+        headers: {
+          authorization: token,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    return { ok: true, response: result.data.cachedData };
+  } catch (error) {
+    console.error(error);
+    return { ok: false };
+  }
+};
