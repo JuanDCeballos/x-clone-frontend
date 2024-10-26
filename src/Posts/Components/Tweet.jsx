@@ -12,7 +12,7 @@ import { LogInContext } from '../../LogIn/Context';
 import { useContext } from 'react';
 
 export const Tweet = () => {
-  const { User } = useContext(LogInContext);
+  const { User, Photo } = useContext(LogInContext);
   const textAreaRef = useRef();
   const [textAreaVal, setTextAreaVal] = useState('');
   const onTextAreaChange = (e) => {
@@ -33,7 +33,7 @@ export const Tweet = () => {
     <>
       <div className="flex px-4 border-2 w-[634px] min-h-[124px] bg-black text-white">
         <div className="pt-3 mr-2">
-          <PiUserCircleThin className="w-10 h-10 text-5xl" />
+          <img src={Photo} className=" w-10 h-10 rounded-full border-none" />
         </div>
         <div className="flex-1 flex flex-col justify-center pt-2">
           <div className="py-3">

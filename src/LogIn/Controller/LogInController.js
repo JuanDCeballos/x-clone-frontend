@@ -21,6 +21,7 @@ export async function LogInWithUserName(UserName, PassWord) {
     return {
       ok: true,
       Token: result.data.AccessToken,
+      Photo: result.data.Photo,
     };
   } catch (error) {
     console.error(
@@ -57,6 +58,7 @@ export async function LogInWithEmail(Email, PassWord) {
     return {
       ok: true,
       Token: result.data.AccessToken,
+      Photo: result.data.Photo,
     };
   } catch (error) {
     console.error(

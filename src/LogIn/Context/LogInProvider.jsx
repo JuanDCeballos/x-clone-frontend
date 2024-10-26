@@ -9,18 +9,20 @@ const init = () => {
   const User = JSON.parse(localStorage.getItem('User'));
   return {
     logged: !!User,
-    User,
+    User: User._id,
+    Photo: User.Photo,
   };
 };
 
 export const LogInProvider = ({ children }) => {
   const [LogInState, dispatch] = useReducer(LogInReducer, initialState, init);
 
-  function LogIn(token) {
-    const payload = token;
+  function LogIn(token, photo) {
+    const payload = { _id: token, Photo: photo };
     const action = { type: LogInContextTypes.LogIn, payload };
-    localStorage.setItem('User', JSON.stringify(token));
+    localStorage.setItem('User', JSON.stringify(payload));
     dispatch(action);
+    console.log(LogInState);
   }
 
   function LogOut() {
