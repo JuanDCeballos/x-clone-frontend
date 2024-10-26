@@ -4,11 +4,13 @@ import './index.css';
 import { RouterProvider } from 'react-router-dom';
 import routes from './Routes/routes.jsx';
 import { LogInProvider } from './LogIn/Context';
+import { PostsProvider } from './Tweets/Context/index.js';
+
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <LogInProvider>
+  <LogInProvider>
+    <PostsProvider>
       <RouterProvider router={routes} />
-    </LogInProvider>
-  </StrictMode>
+    </PostsProvider>
+  </LogInProvider>
 );
