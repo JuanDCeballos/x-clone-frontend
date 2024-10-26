@@ -1,6 +1,17 @@
 import { Tweet, Post } from '../../Tweets/Components';
+import { useContext, useEffect, useState } from 'react';
+import { PostsContext } from '../../Tweets/Context/index.js';
+import { LogInContext } from '../../LogIn/Context/index.js';
+
 
 export const Feed = () => {
+  const { GetPosts, posts } = useContext(PostsContext);
+  const { User } = useContext(LogInContext);
+
+  useEffect(() => {
+    GetPosts(User)
+  }, []);
+
   return (
     <>
       <div className="w-[634px]">
@@ -13,11 +24,12 @@ export const Feed = () => {
             <span>Following</span>
           </div>
         </div>
-        <Tweet />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
+        <Tweet/>
+        {
+          posts.map((post) => (
+            <Post key={post._id} PostInfo={post}/>
+          ))
+        }
       </div>
     </>
   );
