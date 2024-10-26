@@ -1,7 +1,7 @@
 export const UnderConstructionComponent = () => {
   return (
     <>
-      <div className="flex flex-col justify-center items-center min-h-screen bg-[rgb(65,65,66)] w-[634px]">
+      <div className="flex flex-col justify-center items-center min-h-screen bg-black w-[634px]">
         <div className="w-[634px] bg-black min-h-full flex flex-col items-center justify-center">
           <img src="UnderConstruction.png" className="size-auto" />
           <div className="border-2 border-b-white rounded-full w-3/4 mb-4"></div>

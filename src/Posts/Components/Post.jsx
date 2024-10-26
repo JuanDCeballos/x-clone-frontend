@@ -6,18 +6,22 @@ import { LiaRetweetSolid } from 'react-icons/lia';
 import { CiHeart, CiBookmark } from 'react-icons/ci';
 import { BiBarChart } from 'react-icons/bi';
 import { RiShare2Line } from 'react-icons/ri';
+import { GetTimeDifference } from '../../Common/Functions/index.js';
 
-export const Post = () => {
+export const Post = ({ PostInfo } ) => {
   return (
     <>
       <div className="flex px-4 border-l-2 border-r-2 border-b-2 w-[634px] min-h-[124px]">
         <div className="pt-3 mr-2">
-          <PiUserCircleThin className="w-10 h-10 text-5xl" />
+          <img
+            src={PostInfo.userInfo.photo}
+            alt={`${PostInfo.userInfo?.userName}'s profile`}
+            className=" w-10 h-10 rounded-full border-none"
+          />
         </div>
         <div className="flex-1 flex flex-col justify-center pt-2">
           <div className="flex">
-            {/* Agregar fecha, de momento solo la hora */}
-            <span className="flex-1">Lorem @Lorem · 23h</span>
+            <span className="flex-1">{`${PostInfo.userInfo?.name} @${PostInfo.userInfo?.userName} · ${GetTimeDifference(PostInfo?.createdAt)}`}</span>
             <HiOutlineDotsHorizontal
               data-tooltip-id="tooltip-more"
               data-tooltip-content="More"
@@ -28,10 +32,7 @@ export const Post = () => {
           </div>
           <div className="py-3">
             <span>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-              Repudiandae perspiciatis, veniam debitis illum laboriosam
-              voluptate in modi quis temporibus dolorum explicabo consequatur!
-              Fuga repellendus cumque delectus natus hic a qui.
+              { PostInfo?.content }
             </span>
           </div>
           <div className="pb-2">

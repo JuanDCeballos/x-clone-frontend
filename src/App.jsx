@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom';
 import { AboutComponent, Toolbar } from './Home/Components';
 
 function App() {
+  // dotenv.config();
   return (
     <>
       <div className="flex bg-black text-white">

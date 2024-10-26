@@ -1,7 +1,29 @@
+import { useContext, useState } from 'react';
 import { FaApple, FaGoogle } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { LogInWithUserName, LogInWithEmail } from '../Controller';
+import { LogInContext } from '../Context/LogInContext';
 
 export const LogInComponent = () => {
+  const [PassWord, SetPassWord] = useState('');
+  const [User, SetUser] = useState('');
+  const { LogIn } = useContext(LogInContext);
+  const navigate = useNavigate();
+
+  async function OnLogIn() {
+    let result;
+    if (User.includes('@')) {
+      result = await LogInWithEmail(User, PassWord);
+    } else {
+      result = await LogInWithUserName(User, PassWord);
+    }
+
+    if (result.ok) {
+      LogIn(result.Token);
+      navigate('/feed', { replace: true });
+    }
+  }
+
   return (
     <>
       <div className="flex flex-col md:flex-row items-center justify-center bg-black min-h-screen">
@@ -28,6 +50,9 @@ export const LogInComponent = () => {
                 id="email-userName"
                 placeholder="Email or user name"
                 className="border border-[rgb(29,155,240)] bg-black h-12 pl-4 focus:outline-none rounded-md"
+                onChange={(e) => {
+                  SetUser(e.target.value);
+                }}
               />
               <label htmlFor="password" className="text-sm">
                 Password
@@ -38,9 +63,15 @@ export const LogInComponent = () => {
                 id="password"
                 placeholder="Password"
                 className="border border-[rgb(29,155,240)] bg-black h-12 pl-4 focus:outline-none rounded-md"
+                onChange={(e) => {
+                  SetPassWord(e.target.value);
+                }}
               />
             </div>
-            <button className="bg-[rgb(29,155,240)] mt-6 rounded-full w-full h-12 flex items-center justify-center font-semibold text-white hover:bg-[rgb(27,137,211)] transition-colors duration-300">
+            <button
+              className="bg-[rgb(29,155,240)] mt-6 rounded-full w-full h-12 flex items-center justify-center font-semibold text-white hover:bg-[rgb(27,137,211)] transition-colors duration-300"
+              onClick={OnLogIn}
+            >
               Sign in
             </button>
           </div>

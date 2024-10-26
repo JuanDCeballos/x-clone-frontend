@@ -7,13 +7,13 @@ import {
   GoPerson,
 } from 'react-icons/go';
 import { BsSlashSquare, BsFeather } from 'react-icons/bs';
-import { PiDotsThreeCircleLight } from 'react-icons/pi';
 import {} from 'react-icons/bs';
-import { ModalTweet } from './../../Tweets/Components';
+import { ModalTweet } from './../../Posts/Components';
 import { FaXTwitter } from 'react-icons/fa6';
 import { SidebarIcon } from './../../Common/Components';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { IoLogOutOutline } from 'react-icons/io5';
 
 export const Toolbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -58,8 +58,8 @@ export const Toolbar = () => {
           <Link to="profile">
             <SidebarIcon Icon={GoPerson} />
           </Link>
-          <Link to="underConstruction">
-            <SidebarIcon Icon={PiDotsThreeCircleLight} />
+          <Link to="LogOut">
+            <SidebarIcon Icon={IoLogOutOutline} />
           </Link>
         </div>
 
