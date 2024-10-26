@@ -1,14 +1,23 @@
 import { FaArrowLeft, FaCalendarAlt, FaCheckCircle } from 'react-icons/fa';
-import { Feed } from '../../Home/Components';
 import { useContext, useEffect, useState } from 'react';
 import { GetUserDataByUID } from '../Controller';
 import { LogInContext } from '../../LogIn/Context';
 import { LoadingComponent } from '../../Common/Components';
+import { FollowersUsersComponent, FollowedUsersComponent } from './';
+
+const TabsDictionary = {
+  Posts: 'My Posts',
+  Followers: 'Followers',
+  Following: 'Following',
+};
 
 export const UserProfile = () => {
   const { User } = useContext(LogInContext);
   const [CurrentUser, SetCurrentUser] = useState();
   const [IsGettingData, SetIsGettingData] = useState(true);
+  const [CurrentTabSelected, SetCurrentTabSelected] = useState(
+    TabsDictionary.Posts
+  );
 
   useEffect(() => {
     SetIsGettingData(true);
@@ -20,6 +29,19 @@ export const UserProfile = () => {
         SetIsGettingData(false);
       });
   }, []);
+
+  function GetCurrentViewByTab(SelectedTab) {
+    switch (SelectedTab) {
+      case TabsDictionary.Posts:
+        break;
+
+      case TabsDictionary.Following:
+        return <FollowedUsersComponent />;
+
+      case TabsDictionary.Followers:
+        return <FollowersUsersComponent />;
+    }
+  }
 
   return (
     <div className=" bg-black text-white w-[634px]">
@@ -75,30 +97,26 @@ export const UserProfile = () => {
 
           <div className="flex border-b border-gray-800">
             {[
-              'Posts',
-              'Replies',
-              'Highlights',
-              'Articles',
-              'Media',
-              'Likes',
-            ].map((tab, index) => (
+              TabsDictionary.Posts,
+              TabsDictionary.Following,
+              TabsDictionary.Followers,
+            ].map((tab) => (
               <button
-                key={index}
+                key={tab}
                 className={`flex-1 py-4 hover:bg-gray-800 ${
-                  index === 0
+                  CurrentTabSelected === tab
                     ? 'border-b-2 border-blue-400 font-bold'
                     : 'text-gray-500'
                 }`}
+                onClick={() => {
+                  SetCurrentTabSelected(tab);
+                }}
               >
                 {tab}
               </button>
             ))}
           </div>
-
-          <div className="p-4">
-            <h2 className="font-bold text-xl">Who to follow</h2>
-          </div>
-          <Feed />
+          {GetCurrentViewByTab(CurrentTabSelected)}
         </>
       )}
     </div>
