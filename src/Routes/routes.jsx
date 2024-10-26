@@ -9,6 +9,7 @@ import { Feed } from '../Home/Components';
 import { LogInComponent, LogOutComponent } from '../LogIn/Components/index';
 import { PrivateRouter } from './PrivateRoute';
 import { PublicRouter } from './PublicRoute';
+import ViewPost from '../Posts/Components/ViewPost';
 
 const routes = createBrowserRouter([
   {
@@ -19,11 +20,11 @@ const routes = createBrowserRouter([
       </PrivateRouter>
     ),
     errorElement: <PageNotFoundComponent />,
-    // Verifiar si estas rutas al ser hijas de una ruta protected "Heredan ese comportamienot" o tambien se les debe poner la ruta protected
     children: [
       { path: 'profile', element: <UserProfile /> },
       { path: 'feed', element: <Feed /> },
       { path: 'underConstruction', element: <UnderConstructionComponent /> },
+      { path: 'detail', element: <ViewPost /> },
     ],
   },
   {
