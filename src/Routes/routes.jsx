@@ -24,7 +24,7 @@ const routes = createBrowserRouter([
       { path: 'profile', element: <UserProfile /> },
       { path: 'feed', element: <Feed /> },
       { path: 'underConstruction', element: <UnderConstructionComponent /> },
-      { path: 'detail', element: <ViewPost /> },
+      { path: 'post/:id', element: <ViewPost /> },
     ],
   },
   {
