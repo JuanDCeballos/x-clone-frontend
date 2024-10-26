@@ -2,15 +2,19 @@ import ReactModal from 'react-modal';
 import { Tooltip } from 'react-tooltip';
 import { Tweet } from './Tweet';
 import { IoMdClose } from 'react-icons/io';
+import { useContext } from 'react';
+import { PostsContext } from '../Context/PostsContext';
 
 ReactModal.setAppElement(document.getElementById('root'));
 
-export const ModalTweet = ({ isOpen, closeModal }) => {
+export const ModalTweet = () => {
+  const { ModalIsOpen, CloseModal } = useContext(PostsContext);
+
   return (
     <>
       <ReactModal
-        isOpen={isOpen}
-        onRequestClose={closeModal}
+        isOpen={ModalIsOpen}
+        onRequestClose={!ModalIsOpen}
         style={{
           content: {
             top: '20%',
@@ -24,7 +28,7 @@ export const ModalTweet = ({ isOpen, closeModal }) => {
         }}
       >
         <div className="flex">
-          <div className="flex-1" onClick={closeModal}>
+          <div className="flex-1" onClick={CloseModal}>
             <IoMdClose
               data-tooltip-id="tooltip-close"
               data-tooltip-content="Close"

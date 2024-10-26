@@ -12,7 +12,7 @@ import { useContext } from 'react';
 import { PostsContext } from '../Context/PostsContext';
 
 export const Tweet = () => {
-  const { InsertCreatedPost } = useContext(PostsContext);
+  const { InsertCreatedPost, CloseModal } = useContext(PostsContext);
   const { User, Photo, UserName, Name } = useContext(LogInContext);
   const textAreaRef = useRef();
   const [textAreaVal, setTextAreaVal] = useState('');
@@ -38,6 +38,7 @@ export const Tweet = () => {
       };
 
       InsertCreatedPost(object);
+      CloseModal();
       setTextAreaVal('');
     }
   };
