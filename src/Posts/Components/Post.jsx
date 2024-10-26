@@ -21,7 +21,7 @@ export const Post = ({ PostInfo }) => {
           />
         </div>
         <div className="flex-1 flex flex-col justify-center pt-2">
-          <Link to="/detail">
+          <Link to={`/post/${PostInfo._id}`}>
             <div className="flex">
               <span className="flex-1">{`${PostInfo.userInfo?.name} @${
                 PostInfo.userInfo?.userName
