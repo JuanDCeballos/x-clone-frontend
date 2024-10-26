@@ -1,9 +1,9 @@
 import { FaArrowLeft, FaCalendarAlt, FaCheckCircle } from 'react-icons/fa';
-import { Feed } from '../../Home/Components';
 import { useContext, useEffect, useState } from 'react';
 import { GetUserDataByUID } from '../Controller';
 import { LogInContext } from '../../LogIn/Context';
 import { LoadingComponent } from '../../Common/Components';
+import { FollowersUsersComponent, FollowedUsersComponent } from './';
 
 const TabsDictionary = {
   Posts: 'My Posts',
@@ -29,6 +29,19 @@ export const UserProfile = () => {
         SetIsGettingData(false);
       });
   }, []);
+
+  function GetCurrentViewByTab(SelectedTab) {
+    switch (SelectedTab) {
+      case TabsDictionary.Posts:
+        break;
+
+      case TabsDictionary.Following:
+        return <FollowedUsersComponent />;
+
+      case TabsDictionary.Followers:
+        return <FollowersUsersComponent />;
+    }
+  }
 
   return (
     <div className=" bg-black text-white w-[634px]">
@@ -103,6 +116,7 @@ export const UserProfile = () => {
               </button>
             ))}
           </div>
+          {GetCurrentViewByTab(CurrentTabSelected)}
         </>
       )}
     </div>

@@ -46,3 +46,45 @@ export async function GetUserDataByUID(UserUID) {
     return { ok: false };
   }
 }
+
+export async function GetFollowers(Token) {
+  try {
+    if (!Token) throw new Error('Token is empty.');
+
+    const result = await axios.get(
+      'http://localhost:1234/api/v1/User/Followers',
+      {
+        headers: {
+          authorization: Token,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    return { ok: true, data: result.data.data.followers };
+  } catch (error) {
+    console.error(error);
+    return { ok: false };
+  }
+}
+
+export async function GetFollowed(Token) {
+  try {
+    if (!Token) throw new Error('Token is empty.');
+
+    const result = await axios.get(
+      'http://localhost:1234/api/v1/User/Followed',
+      {
+        headers: {
+          authorization: Token,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    return { ok: true, data: result.data.data.followed };
+  } catch (error) {
+    console.error(error);
+    return { ok: false };
+  }
+}
