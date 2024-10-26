@@ -1,7 +1,5 @@
 import { Outlet } from 'react-router-dom';
 import { AboutComponent, Toolbar } from './Home/Components';
-import { LogInProvider } from './LogIn/Context';
-import dotenv from 'dotenv';
 
 function App() {
   // dotenv.config();
