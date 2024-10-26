@@ -22,5 +22,17 @@ export const PostsReducer = (state = {}, action) => {
         ...state,
         posts: [action.payload, ...state.posts],
       };
+
+    case PostReducerTypes.CloseTweetModal:
+      return {
+        ...state,
+        ModalIsOpen: false,
+      };
+
+    case PostReducerTypes.OpenTweetModal:
+      return {
+        ...state,
+        ModalIsOpen: true,
+      };
   }
 };
