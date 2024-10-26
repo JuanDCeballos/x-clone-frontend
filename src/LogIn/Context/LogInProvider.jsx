@@ -11,18 +11,19 @@ const init = () => {
     logged: !!User,
     User: User._id,
     Photo: User.Photo,
+    UserName: User.UserName,
+    Name: User.Name,
   };
 };
 
 export const LogInProvider = ({ children }) => {
   const [LogInState, dispatch] = useReducer(LogInReducer, initialState, init);
 
-  function LogIn(token, photo) {
-    const payload = { _id: token, Photo: photo };
+  function LogIn(token, photo, UserName, Name) {
+    const payload = { _id: token, Photo: photo, UserName, Name };
     const action = { type: LogInContextTypes.LogIn, payload };
     localStorage.setItem('User', JSON.stringify(payload));
     dispatch(action);
-    console.log(LogInState);
   }
 
   function LogOut() {

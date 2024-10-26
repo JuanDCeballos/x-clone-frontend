@@ -21,7 +21,7 @@ export const LogInComponent = () => {
     if (result.ok) {
       console.log(result);
 
-      LogIn(result.Token, result.Photo);
+      LogIn(result.Token, result.Photo, result.UserName, result.Name);
       navigate('/feed', { replace: true });
     }
   }

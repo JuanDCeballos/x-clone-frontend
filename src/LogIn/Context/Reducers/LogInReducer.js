@@ -9,6 +9,8 @@ export const LogInReducer = (state = {}, action) => {
         logged: true,
         User: action.payload._id,
         Photo: action.payload.Photo,
+        UserName: action.payload.UserName,
+        Name: action.payload.Name,
       };
 
     case LogInContextTypes.LogOut:
@@ -17,6 +19,8 @@ export const LogInReducer = (state = {}, action) => {
         logged: false,
         User: undefined,
         Photo: undefined,
+        UserName: undefined,
+        Name: undefined,
       };
   }
 };
