@@ -4,7 +4,7 @@ export async function CreatePost(Content, UserUID) {
   try {
     if (!Content) throw new Error('Content is empty.');
     if (!UserUID) throw new Error('UserUID is empty.');
-    await axios.post(
+    const result = await axios.post(
       'http://localhost:1234/api/v1/posts',
       {
         content: Content,
@@ -17,7 +17,7 @@ export async function CreatePost(Content, UserUID) {
       }
     );
 
-    return { ok: true };
+    return { ok: result.data.ok, data: result.data.data };
   } catch (error) {
     console.error(error);
     return { ok: false };

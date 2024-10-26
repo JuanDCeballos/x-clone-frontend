@@ -10,6 +10,7 @@ const InialState = {
     _id: undefined,
     createdAt: undefined,
   },
+  ModalIsOpen: false,
 };
 
 export const PostsProvider = ({ children }) => {
@@ -18,6 +19,12 @@ export const PostsProvider = ({ children }) => {
   function UpdateLastPostInfo(_id, CreatedAt) {
     const payload = { _id, CreatedAt };
     const action = { type: PostReducerTypes.UpdateLastPostInfo, payload };
+    dispatch(action);
+  }
+
+  function InsertCreatedPost(Post) {
+    const payload = Post;
+    const action = { type: PostReducerTypes.InsertCreatedPost, payload };
     dispatch(action);
   }
 
@@ -38,11 +45,22 @@ export const PostsProvider = ({ children }) => {
     return true;
   }
 
+  function CloseModal() {
+    dispatch({ type: PostReducerTypes.CloseTweetModal });
+  }
+
+  function OpenModal() {
+    dispatch({ type: PostReducerTypes.OpenTweetModal });
+  }
+
   return (
     <PostsContext.Provider
       value={{
         ...PostsState,
+        InsertCreatedPost,
         GetPosts,
+        CloseModal,
+        OpenModal,
       }}
     >
       {children}
