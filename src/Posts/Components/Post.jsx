@@ -15,13 +15,13 @@ export const Post = ({ PostInfo }) => {
       <div className="flex px-4 border-l-2 border-r-2 border-b-2 w-[634px] min-h-[124px]">
         <div className="pt-3 mr-2">
           <img
-            src={PostInfo.userInfo.photo}
-            alt={`${PostInfo.userInfo?.userName}'s profile`}
+            src={PostInfo?.userInfo?.photo}
+            alt={`${PostInfo?.userInfo?.userName}'s profile`}
             className=" w-10 h-10 rounded-full border-none"
           />
         </div>
         <div className="flex-1 flex flex-col justify-center pt-2">
-          <Link to={`/post/${PostInfo._id}`}>
+          <Link to={`/post/${PostInfo?._id}`}>
             <div className="flex">
               <span className="flex-1">{`${PostInfo.userInfo?.name} @${
                 PostInfo.userInfo?.userName
