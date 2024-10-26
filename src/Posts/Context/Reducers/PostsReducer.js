@@ -14,7 +14,14 @@ export const PostsReducer = (state = {}, action) => {
     case PostReducerTypes.LoadPosts:
       return {
         ...state,
-        posts: [...(state.posts || []), ...action.payload],
+        posts: [
+          ...new Map(
+            [...(state.posts || []), ...action.payload].map((post) => [
+              post._id,
+              post,
+            ])
+          ).values(),
+        ],
       };
 
     case PostReducerTypes.InsertCreatedPost:
