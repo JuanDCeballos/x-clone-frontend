@@ -32,7 +32,7 @@ const ViewPost = () => {
   return (
     <div className="min-h-dvh">
       <h2 className="font-medium text-2xl mt-3 mb-1">Post</h2>
-      {IsGettingData ? (
+      {IsGettingData || post === undefined ? (
         <LoadingComponent />
       ) : (
         <div className="flex px-4 border-l-2 border-t-2 border-r-2 border-b-2 w-[634px] min-h-[124px]">
