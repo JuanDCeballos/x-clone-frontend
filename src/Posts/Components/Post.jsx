@@ -7,8 +7,9 @@ import { CiHeart, CiBookmark } from 'react-icons/ci';
 import { BiBarChart } from 'react-icons/bi';
 import { RiShare2Line } from 'react-icons/ri';
 import { GetTimeDifference } from '../../Common/Functions/index.js';
+import { Link } from 'react-router-dom';
 
-export const Post = ({ PostInfo } ) => {
+export const Post = ({ PostInfo }) => {
   return (
     <>
       <div className="flex px-4 border-l-2 border-r-2 border-b-2 w-[634px] min-h-[124px]">
@@ -20,21 +21,23 @@ export const Post = ({ PostInfo } ) => {
           />
         </div>
         <div className="flex-1 flex flex-col justify-center pt-2">
-          <div className="flex">
-            <span className="flex-1">{`${PostInfo.userInfo?.name} @${PostInfo.userInfo?.userName} · ${GetTimeDifference(PostInfo?.createdAt)}`}</span>
-            <HiOutlineDotsHorizontal
-              data-tooltip-id="tooltip-more"
-              data-tooltip-content="More"
-              data-tooltip-place="bottom"
-              className="w-5 h-5 cursor-pointer"
-            />
-            <Tooltip id="tooltip-more" />
-          </div>
-          <div className="py-3">
-            <span>
-              { PostInfo?.content }
-            </span>
-          </div>
+          <Link to="/detail">
+            <div className="flex">
+              <span className="flex-1">{`${PostInfo.userInfo?.name} @${
+                PostInfo.userInfo?.userName
+              } · ${GetTimeDifference(PostInfo?.createdAt)}`}</span>
+              <HiOutlineDotsHorizontal
+                data-tooltip-id="tooltip-more"
+                data-tooltip-content="More"
+                data-tooltip-place="bottom"
+                className="w-5 h-5 cursor-pointer"
+              />
+              <Tooltip id="tooltip-more" />
+            </div>
+            <div className="py-3">
+              <span>{PostInfo?.content}</span>
+            </div>
+          </Link>
           <div className="pb-2">
             <div className="flex mt-2">
               <div className="flex-1 flex text-gray-500 gap-24">
