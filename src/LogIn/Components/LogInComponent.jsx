@@ -19,7 +19,9 @@ export const LogInComponent = () => {
     }
 
     if (result.ok) {
-      LogIn(result.Token);
+      console.log(result);
+
+      LogIn(result.Token, result.Photo, result.UserName, result.Name);
       navigate('/feed', { replace: true });
     }
   }

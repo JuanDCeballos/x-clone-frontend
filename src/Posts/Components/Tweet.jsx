@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import { Tooltip } from 'react-tooltip';
-import { PiUserCircleThin } from 'react-icons/pi';
 import { BiWorld, BiPoll } from 'react-icons/bi';
 import { GoFileMedia } from 'react-icons/go';
 import { MdOutlineGifBox } from 'react-icons/md';
@@ -10,9 +9,11 @@ import { IoLocationOutline } from 'react-icons/io5';
 import { CreatePost } from '../Controller';
 import { LogInContext } from '../../LogIn/Context';
 import { useContext } from 'react';
+import { PostsContext } from '../Context/PostsContext';
 
 export const Tweet = () => {
-  const { User } = useContext(LogInContext);
+  const { InsertCreatedPost, CloseModal } = useContext(PostsContext);
+  const { User, Photo, UserName, Name } = useContext(LogInContext);
   const textAreaRef = useRef();
   const [textAreaVal, setTextAreaVal] = useState('');
   const onTextAreaChange = (e) => {
@@ -26,14 +27,27 @@ export const Tweet = () => {
 
   const OnCreate = async () => {
     const result = await CreatePost(textAreaVal, User);
-    if (result.ok) console.log('Post creado..');
+    if (result.ok) {
+      const object = {
+        ...result.data,
+        userInfo: {
+          name: Name,
+          userName: UserName,
+          photo: Photo,
+        },
+      };
+
+      InsertCreatedPost(object);
+      CloseModal();
+      setTextAreaVal('');
+    }
   };
 
   return (
     <>
       <div className="flex px-4 border-2 w-[634px] min-h-[124px] bg-black text-white">
         <div className="pt-3 mr-2">
-          <PiUserCircleThin className="w-10 h-10 text-5xl" />
+          <img src={Photo} className=" w-10 h-10 rounded-full border-none" />
         </div>
         <div className="flex-1 flex flex-col justify-center pt-2">
           <div className="py-3">
