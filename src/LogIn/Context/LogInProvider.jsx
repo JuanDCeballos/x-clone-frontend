@@ -9,10 +9,10 @@ const init = () => {
   const User = JSON.parse(localStorage.getItem('User'));
   return {
     logged: !!User,
-    User: User._id,
-    Photo: User.Photo,
-    UserName: User.UserName,
-    Name: User.Name,
+    User: User?._id,
+    Photo: User?.Photo,
+    UserName: User?.UserName,
+    Name: User?.Name,
   };
 };
 
