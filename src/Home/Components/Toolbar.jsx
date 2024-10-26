@@ -8,7 +8,7 @@ import {
 } from 'react-icons/go';
 import { BsSlashSquare, BsFeather } from 'react-icons/bs';
 import {} from 'react-icons/bs';
-import { ModalTweet } from './../../Tweets/Components';
+import { ModalTweet } from './../../Posts/Components';
 import { FaXTwitter } from 'react-icons/fa6';
 import { SidebarIcon } from './../../Common/Components';
 import { useState } from 'react';

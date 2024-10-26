@@ -1,4 +1,4 @@
-import { Tweet, Post } from '../../Tweets/Components';
+import { Tweet, Post } from '../../Posts/Components';
 
 export const Feed = () => {
   return (
