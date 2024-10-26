@@ -66,7 +66,9 @@ export const getPostById = async (token, postUID) => {
       }
     );
 
-    return { ok: true, response: result.data.cachedData };
+    if (result.data.data === undefined) throw new Error('Data is empty');
+
+    return { ok: true, response: result.data.data };
   } catch (error) {
     console.error(error);
     return { ok: false };
