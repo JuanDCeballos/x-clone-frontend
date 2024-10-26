@@ -24,29 +24,51 @@ export async function CreatePost(Content, UserUID) {
   }
 }
 
-export async function GetAllPosts(Token, LastPostId, LastPostCreatedAt){
-  try{
-  if(!Token) throw new Error('Token is empty.');
-  let Body = {};
+export async function GetAllPosts(Token, LastPostId, LastPostCreatedAt) {
+  try {
+    if (!Token) throw new Error('Token is empty.');
+    let Body = {};
 
-  if(LastPostId && LastPostCreatedAt){
-    Body = {
-      LastPostID: LastPostId,
-      LastPostCreatedAt: LastPostCreatedAt
+    if (LastPostId && LastPostCreatedAt) {
+      Body = {
+        LastPostID: LastPostId,
+        LastPostCreatedAt: LastPostCreatedAt,
+      };
     }
-  }
 
-  const result = await axios.get('http://localhost:1234/api/v1/Posts/all', {
+    const result = await axios.get('http://localhost:1234/api/v1/Posts/all', {
       headers: {
         authorization: Token,
         'Content-Type': 'application/json',
       },
-      Body
- });
+      Body,
+    });
 
-  return {ok: true, response: result };
-  }catch(error){
+    return { ok: true, response: result };
+  } catch (error) {
     console.error(error);
     return { ok: false };
   }
 }
+
+export const getPostById = async (token, postUID) => {
+  try {
+    if (!token) throw new Error('Token is empty.');
+    if (!postUID) throw new Error('postUID is empty.');
+
+    const result = await axios.get(
+      `http://localhost:1234/api/v1/Posts/${postUID}`,
+      {
+        headers: {
+          authorization: token,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    return { ok: true, response: result.data.cachedData };
+  } catch (error) {
+    console.error(error);
+    return { ok: false };
+  }
+};
