@@ -16,5 +16,11 @@ export const PostsReducer = (state = {}, action) => {
         ...state,
         posts: [...(state.posts || []), ...action.payload],
       };
+
+    case PostReducerTypes.InsertCreatedPost:
+      return {
+        ...state,
+        posts: [action.payload, ...state.posts],
+      };
   }
 };

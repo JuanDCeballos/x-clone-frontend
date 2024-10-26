@@ -21,6 +21,12 @@ export const PostsProvider = ({ children }) => {
     dispatch(action);
   }
 
+  function InsertCreatedPost(Post) {
+    const payload = Post;
+    const action = { type: PostReducerTypes.InsertCreatedPost, payload };
+    dispatch(action);
+  }
+
   async function GetPosts(Token) {
     const RequestResult = await GetAllPosts(
       Token,
@@ -42,6 +48,7 @@ export const PostsProvider = ({ children }) => {
     <PostsContext.Provider
       value={{
         ...PostsState,
+        InsertCreatedPost,
         GetPosts,
       }}
     >
