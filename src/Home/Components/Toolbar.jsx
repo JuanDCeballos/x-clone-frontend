@@ -15,8 +15,10 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { IoLogOutOutline } from 'react-icons/io5';
 import { PostsContext } from '../../Posts/Context/PostsContext';
+import { LogInContext } from '../../LogIn/Context';
 
 export const Toolbar = () => {
+  const { UserName } = useContext(LogInContext);
   const { OpenModal } = useContext(PostsContext);
 
   const openModal = () => {
@@ -52,7 +54,7 @@ export const Toolbar = () => {
           <Link to="underConstruction">
             <SidebarIcon Icon={BsSlashSquare} />
           </Link>
-          <Link to="profile">
+          <Link to={`profile/${UserName}`}>
             <SidebarIcon Icon={GoPerson} />
           </Link>
           <Link to="LogOut">
