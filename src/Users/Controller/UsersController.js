@@ -94,12 +94,35 @@ export async function FollowUser(Token, FollowedID) {
     if (!Token) throw new Error('Token is empty.');
     if (!FollowedID) throw new Error('FollowedID is empty.');
 
-    console.log(Token);
-
     await axios.post(
       'http://localhost:1234/api/v1/User/Follow',
       {
         followedUid: FollowedID,
+      },
+      {
+        headers: {
+          authorization: Token,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    return { ok: true };
+  } catch (error) {
+    console.error(error);
+    return { ok: false };
+  }
+}
+
+export async function UnfollowUser(Token, FollowerUID) {
+  try {
+    if (!Token) throw new Error('Token is empty.');
+    if (!FollowerUID) throw new Error('FollowerUID is empty.');
+
+    await axios.post(
+      'http://localhost:1234/api/v1/User/UnFollow',
+      {
+        followedUid: FollowerUID,
       },
       {
         headers: {
