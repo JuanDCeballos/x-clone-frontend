@@ -7,7 +7,7 @@ import { FollowUser } from '../Controller';
 import { useParams } from 'react-router-dom';
 
 export const FollowersUsersComponent = () => {
-  const { User } = useContext(LogInContext);
+  const { User, UserName } = useContext(LogInContext);
   const [IsGettingData, SetIsGettingData] = useState(true);
   const [Users, SetUsers] = useState([]);
   const { userName } = useParams();
@@ -60,7 +60,7 @@ export const FollowersUsersComponent = () => {
                       {user.name}
                     </span>
                   </div>
-                  {!user?.AlreadyFollowUser ? (
+                  {!user?.AlreadyFollowUser && userName === UserName ? (
                     <>
                       <button
                         className="px-4 py-1 text-sm font-bold text-black bg-white rounded-full transition-colors duration-300 hover:bg-blue-500 hover:text-white"
