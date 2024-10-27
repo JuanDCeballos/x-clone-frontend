@@ -4,22 +4,24 @@ import { GetFollowers } from '../Controller';
 import { LoadingComponent } from '../../Common/Components';
 import { toast } from 'sonner';
 import { FollowUser } from '../Controller';
+import { useParams } from 'react-router-dom';
 
 export const FollowersUsersComponent = () => {
   const { User } = useContext(LogInContext);
   const [IsGettingData, SetIsGettingData] = useState(true);
   const [Users, SetUsers] = useState([]);
+  const { userName } = useParams();
 
   useEffect(() => {
     SetIsGettingData(true);
-    GetFollowers(User)
+    GetFollowers(User, userName)
       .then((result) => {
         SetUsers(result.data);
       })
       .finally(() => {
         SetIsGettingData(false);
       });
-  }, []);
+  }, [userName]);
 
   const OnFollow = async (UsetUIDToFollow) => {
     const result = await FollowUser(User, UsetUIDToFollow);
