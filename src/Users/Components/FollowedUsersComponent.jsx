@@ -4,22 +4,24 @@ import { GetFollowed } from '../Controller';
 import { LoadingComponent } from '../../Common/Components';
 import { toast } from 'sonner';
 import { UnfollowUser } from '../Controller';
+import { useParams } from 'react-router-dom';
 
 export const FollowedUsersComponent = () => {
   const { User } = useContext(LogInContext);
   const [IsGettingData, SetIsGettingData] = useState(true);
   const [Users, SetUsers] = useState([]);
+  const { userName } = useParams();
 
   useEffect(() => {
     SetIsGettingData(true);
-    GetFollowed(User)
+    GetFollowed(User, userName)
       .then((result) => {
         SetUsers(result.data);
       })
       .finally(() => {
         SetIsGettingData(false);
       });
-  }, []);
+  }, [userName]);
 
   const UnFollowUser = async (FollowerUID) => {
     const result = await UnfollowUser(User, FollowerUID);
