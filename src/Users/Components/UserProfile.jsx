@@ -1,6 +1,6 @@
 import { FaArrowLeft, FaCalendarAlt, FaCheckCircle } from 'react-icons/fa';
 import { useContext, useEffect, useState } from 'react';
-import { getUserByUserName, GetUserDataByUID } from '../Controller';
+import { getUserByUserName } from '../Controller';
 import { LogInContext } from '../../LogIn/Context';
 import { LoadingComponent } from '../../Common/Components';
 import { FollowersUsersComponent, FollowedUsersComponent } from './';
