@@ -69,12 +69,13 @@ export const getUserByUserName = async (userUID, userName) => {
   }
 };
 
-export async function GetFollowers(Token) {
+export async function GetFollowers(Token, UserName) {
   try {
     if (!Token) throw new Error('Token is empty.');
+    if (!UserName) throw new Error('User Name is empty.');
 
     const result = await axios.get(
-      'http://localhost:1234/api/v1/User/Followers',
+      `http://localhost:1234/api/v1/User/Followers/${UserName}`,
       {
         headers: {
           authorization: Token,
