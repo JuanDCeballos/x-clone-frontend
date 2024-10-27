@@ -10,6 +10,7 @@ import { CreatePost } from '../Controller';
 import { LogInContext } from '../../LogIn/Context';
 import { useContext } from 'react';
 import { PostsContext } from '../Context/PostsContext';
+import { toast } from 'sonner';
 
 export const Tweet = () => {
   const { InsertCreatedPost, CloseModal } = useContext(PostsContext);
@@ -27,20 +28,23 @@ export const Tweet = () => {
 
   const OnCreate = async () => {
     const result = await CreatePost(textAreaVal, User);
-    if (result.ok) {
-      const object = {
-        ...result.data,
-        userInfo: {
-          name: Name,
-          userName: UserName,
-          photo: Photo,
-        },
-      };
-
-      InsertCreatedPost(object);
-      CloseModal();
-      setTextAreaVal('');
+    if (!result.ok) {
+      toast.error('Post creating failed!');
+      return;
     }
+    const object = {
+      ...result.data,
+      userInfo: {
+        name: Name,
+        userName: UserName,
+        photo: Photo,
+      },
+    };
+
+    toast.success('Post created successfully!');
+    InsertCreatedPost(object);
+    CloseModal();
+    setTextAreaVal('');
   };
 
   return (

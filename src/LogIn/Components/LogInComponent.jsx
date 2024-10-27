@@ -3,6 +3,7 @@ import { FaApple, FaGoogle } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { LogInWithUserName, LogInWithEmail } from '../Controller';
 import { LogInContext } from '../Context/LogInContext';
+import { toast } from 'sonner';
 
 export const LogInComponent = () => {
   const [PassWord, SetPassWord] = useState('');
@@ -18,12 +19,14 @@ export const LogInComponent = () => {
       result = await LogInWithUserName(User, PassWord);
     }
 
-    if (result.ok) {
-      console.log(result);
-
-      LogIn(result.Token, result.Photo, result.UserName, result.Name);
-      navigate('/feed', { replace: true });
+    if (!result.ok) {
+      toast.error('LogIn failed, try again.');
+      return;
     }
+
+    toast.success('LogIn sucessfully!');
+    LogIn(result.Token, result.Photo, result.UserName, result.Name);
+    navigate('/feed', { replace: true });
   }
 
   return (

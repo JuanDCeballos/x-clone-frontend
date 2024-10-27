@@ -12,6 +12,7 @@ import { LogInContext } from '../../LogIn/Context';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 
 export const UserRegister = () => {
   const navigate = useNavigate();
@@ -26,10 +27,14 @@ export const UserRegister = () => {
   const OnRegister = async (userData) => {
     let result = await CreateUser(userData);
 
-    if (result.ok) {
-      LogIn(result.Token);
-      navigate('/feed', { replace: true });
+    if (!result.ok) {
+      toast.error('User creating failed.');
+      return;
     }
+
+    LogIn(result.Token);
+    navigate('/feed', { replace: true });
+    toast.success('User created!');
   };
 
   return (
