@@ -74,3 +74,29 @@ export const getPostById = async (token, postUID) => {
     return { ok: false };
   }
 };
+
+export const getPostsCreatedByFollowingUsers = async (
+  token,
+  lastPostIdFollowing,
+  lastPostCreatedAtFollowing
+) => {
+  try {
+    const result = await axios.get(
+      'http://localhost:1234/api/v1/posts/following',
+      {
+        headers: {
+          authorization: token,
+          'Content-Type': 'application/json',
+        },
+        params: {
+          lastPostIdFollowing,
+          lastPostCreatedAtFollowing,
+        },
+      }
+    );
+    return { ok: true, response: result };
+  } catch (error) {
+    console.error(error);
+    return { ok: false };
+  }
+};
