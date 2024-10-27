@@ -1,9 +1,10 @@
 import { FaArrowLeft, FaCalendarAlt, FaCheckCircle } from 'react-icons/fa';
 import { useContext, useEffect, useState } from 'react';
-import { GetUserDataByUID } from '../Controller';
+import { getUserByUserName, GetUserDataByUID } from '../Controller';
 import { LogInContext } from '../../LogIn/Context';
 import { LoadingComponent } from '../../Common/Components';
 import { FollowersUsersComponent, FollowedUsersComponent } from './';
+import { useParams } from 'react-router-dom';
 
 const TabsDictionary = {
   Posts: 'My Posts',
@@ -18,17 +19,18 @@ export const UserProfile = () => {
   const [CurrentTabSelected, SetCurrentTabSelected] = useState(
     TabsDictionary.Posts
   );
+  const { userName } = useParams();
 
   useEffect(() => {
     SetIsGettingData(true);
-    GetUserDataByUID(User)
+    getUserByUserName(User, userName)
       .then((response) => {
         SetCurrentUser(response.data.data);
       })
       .finally(() => {
         SetIsGettingData(false);
       });
-  }, []);
+  }, [userName]);
 
   function GetCurrentViewByTab(SelectedTab) {
     switch (SelectedTab) {
