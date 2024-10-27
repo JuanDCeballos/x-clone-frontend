@@ -21,7 +21,7 @@ const routes = createBrowserRouter([
     ),
     errorElement: <PageNotFoundComponent />,
     children: [
-      { path: 'profile', element: <UserProfile /> },
+      { path: 'profile/:userName', element: <UserProfile /> },
       { path: 'feed', element: <Feed /> },
       { path: 'underConstruction', element: <UnderConstructionComponent /> },
       { path: 'post/:id', element: <ViewPost /> },
