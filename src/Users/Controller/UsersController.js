@@ -47,6 +47,28 @@ export async function GetUserDataByUID(UserUID) {
   }
 }
 
+export const getUserByUserName = async (userUID, userName) => {
+  try {
+    if (!userUID) throw new Error('userUID is empty.');
+    if (!userName) throw new Error('userName is empty.');
+
+    const result = await axios.get(
+      `http://localhost:1234/api/v1/User/userName/${userName}`,
+      {
+        headers: {
+          authorization: userUID,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    return result;
+  } catch (error) {
+    console.error(error);
+    return { ok: false };
+  }
+};
+
 export async function GetFollowers(Token) {
   try {
     if (!Token) throw new Error('Token is empty.');
