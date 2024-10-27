@@ -18,7 +18,7 @@ import { PostsContext } from '../../Posts/Context/PostsContext';
 import { LogInContext } from '../../LogIn/Context';
 
 export const Toolbar = () => {
-  const { UserName } = useContext(LogInContext);
+  const { UserName, Photo } = useContext(LogInContext);
   const { OpenModal } = useContext(PostsContext);
 
   const openModal = () => {
@@ -55,7 +55,11 @@ export const Toolbar = () => {
             <SidebarIcon Icon={BsSlashSquare} />
           </Link>
           <Link to={`profile/${UserName}`}>
-            <SidebarIcon Icon={GoPerson} />
+            <img
+              src={Photo}
+              alt={`${UserName} avatar`}
+              className="size-8 rounded-full mt-2 mb-2 ml-1"
+            />
           </Link>
           <Link to="LogOut">
             <SidebarIcon Icon={IoLogOutOutline} />
@@ -63,7 +67,7 @@ export const Toolbar = () => {
         </div>
 
         <button
-          className="w-10 bg-blue-400 text-white rounded-full shadow-lg hover:bg-blue-500 transition duration-200 mt-4 p-2"
+          className="w-10 bg-blue-400 text-white rounded-full shadow-lg hover:bg-blue-500 transition duration-200 mt-4 p-2 mr-1"
           onClick={openModal}
         >
           <BsFeather className="h-6 w-6" />

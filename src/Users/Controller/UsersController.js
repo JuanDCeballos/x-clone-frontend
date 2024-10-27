@@ -69,12 +69,13 @@ export const getUserByUserName = async (userUID, userName) => {
   }
 };
 
-export async function GetFollowers(Token) {
+export async function GetFollowers(Token, UserName) {
   try {
     if (!Token) throw new Error('Token is empty.');
+    if (!UserName) throw new Error('User Name is empty.');
 
     const result = await axios.get(
-      'http://localhost:1234/api/v1/User/Followers',
+      `http://localhost:1234/api/v1/User/Followers/${UserName}`,
       {
         headers: {
           authorization: Token,
@@ -90,12 +91,13 @@ export async function GetFollowers(Token) {
   }
 }
 
-export async function GetFollowed(Token) {
+export async function GetFollowed(Token, TargetUserName) {
   try {
     if (!Token) throw new Error('Token is empty.');
+    if (!TargetUserName) throw new Error('UserName is empty.');
 
     const result = await axios.get(
-      'http://localhost:1234/api/v1/User/Followed',
+      `http://localhost:1234/api/v1/User/Followed/${TargetUserName}`,
       {
         headers: {
           authorization: Token,
@@ -105,6 +107,56 @@ export async function GetFollowed(Token) {
     );
 
     return { ok: true, data: result.data.data.followed };
+  } catch (error) {
+    console.error(error);
+    return { ok: false };
+  }
+}
+
+export async function FollowUser(Token, FollowedID) {
+  try {
+    if (!Token) throw new Error('Token is empty.');
+    if (!FollowedID) throw new Error('FollowedID is empty.');
+
+    await axios.post(
+      'http://localhost:1234/api/v1/User/Follow',
+      {
+        followedUid: FollowedID,
+      },
+      {
+        headers: {
+          authorization: Token,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    return { ok: true };
+  } catch (error) {
+    console.error(error);
+    return { ok: false };
+  }
+}
+
+export async function UnfollowUser(Token, FollowerUID) {
+  try {
+    if (!Token) throw new Error('Token is empty.');
+    if (!FollowerUID) throw new Error('FollowerUID is empty.');
+
+    await axios.post(
+      'http://localhost:1234/api/v1/User/UnFollow',
+      {
+        followedUid: FollowerUID,
+      },
+      {
+        headers: {
+          authorization: Token,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    return { ok: true };
   } catch (error) {
     console.error(error);
     return { ok: false };
