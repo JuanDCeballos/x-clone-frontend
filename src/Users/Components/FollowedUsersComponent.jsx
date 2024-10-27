@@ -7,7 +7,7 @@ import { UnfollowUser } from '../Controller';
 import { useParams } from 'react-router-dom';
 
 export const FollowedUsersComponent = () => {
-  const { User } = useContext(LogInContext);
+  const { User, UserName } = useContext(LogInContext);
   const [IsGettingData, SetIsGettingData] = useState(true);
   const [Users, SetUsers] = useState([]);
   const { userName } = useParams();
@@ -57,14 +57,20 @@ export const FollowedUsersComponent = () => {
                       {user.name}
                     </span>
                   </div>
-                  <button
-                    className="px-4 py-1 text-sm font-bold text-black bg-white rounded-full transition-colors duration-300 hover:bg-blue-500 hover:text-white"
-                    onClick={() => {
-                      UnFollowUser(user.uid);
-                    }}
-                  >
-                    Unfollow
-                  </button>
+                  {UserName === userName ? (
+                    <>
+                      <button
+                        className="px-4 py-1 text-sm font-bold text-black bg-white rounded-full transition-colors duration-300 hover:bg-blue-500 hover:text-white"
+                        onClick={() => {
+                          UnFollowUser(user.uid);
+                        }}
+                      >
+                        Unfollow
+                      </button>
+                    </>
+                  ) : (
+                    <></>
+                  )}
                 </div>
                 <div className="text-gray-500">@{user.userName}</div>
               </div>
