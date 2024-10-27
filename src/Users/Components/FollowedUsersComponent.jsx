@@ -6,7 +6,7 @@ import { toast } from 'sonner';
 import { UnfollowUser } from '../Controller';
 import { useParams } from 'react-router-dom';
 
-export const FollowedUsersComponent = () => {
+export const FollowedUsersComponent = ({ UpdateParentFunction }) => {
   const { User, UserName } = useContext(LogInContext);
   const [IsGettingData, SetIsGettingData] = useState(true);
   const [Users, SetUsers] = useState([]);
@@ -28,6 +28,7 @@ export const FollowedUsersComponent = () => {
 
     if (result.ok) {
       SetUsers(Users.filter((User) => User.uid != FollowerUID));
+      UpdateParentFunction();
       toast.success('User unfollowed!');
     } else {
       toast.error('Unfollow user failed.');

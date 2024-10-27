@@ -32,16 +32,32 @@ export const UserProfile = () => {
       });
   }, [userName]);
 
+  function IncreaseByOneFollowedCount() {
+    CurrentUser.followed += 1;
+  }
+
+  function DecreaseByOneFollowedCount() {
+    CurrentUser.followed -= 1;
+  }
+
   function GetCurrentViewByTab(SelectedTab) {
     switch (SelectedTab) {
       case TabsDictionary.Posts:
         break;
 
       case TabsDictionary.Following:
-        return <FollowedUsersComponent />;
+        return (
+          <FollowedUsersComponent
+            UpdateParentFunction={DecreaseByOneFollowedCount}
+          />
+        );
 
       case TabsDictionary.Followers:
-        return <FollowersUsersComponent />;
+        return (
+          <FollowersUsersComponent
+            UpdateParentFunction={IncreaseByOneFollowedCount}
+          />
+        );
     }
   }
 

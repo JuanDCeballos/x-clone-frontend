@@ -6,7 +6,7 @@ import { toast } from 'sonner';
 import { FollowUser } from '../Controller';
 import { useParams } from 'react-router-dom';
 
-export const FollowersUsersComponent = () => {
+export const FollowersUsersComponent = ({ UpdateParentFunction }) => {
   const { User, UserName } = useContext(LogInContext);
   const [IsGettingData, SetIsGettingData] = useState(true);
   const [Users, SetUsers] = useState([]);
@@ -31,6 +31,7 @@ export const FollowersUsersComponent = () => {
       const UsersList = [...Users];
       UsersList[TargetUserIndex].AlreadyFollowUser = true;
       SetUsers(UsersList);
+      UpdateParentFunction();
       toast.success('User followed!');
     } else {
       toast.error('User followed failed.');
