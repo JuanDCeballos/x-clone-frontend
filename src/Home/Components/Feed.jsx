@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from 'react';
 import { PostsContext } from '../../Posts/Context/index.js';
 import { LogInContext } from '../../LogIn/Context/index.js';
 import { LoadingComponent } from '../../Common/Components';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 const tabsObj = {
   forYou: 'For you',
@@ -15,18 +16,33 @@ export const Feed = () => {
   const { User } = useContext(LogInContext);
   const [IsGettingData, SetIsGettingData] = useState(true);
   const [currentTab, setCurrentTab] = useState(tabsObj.forYou);
+  const [allRecordsLoaded, setAllRecordsLoaded] = useState(false);
+
+  const fetchData = async () => {
+    let res;
+    if (currentTab === tabsObj.forYou) {
+      res = await GetPosts(User);
+    } else {
+      res = await getPostsByFollowingUsers(User);
+    }
+
+    setAllRecordsLoaded(res.resposeLength === 0);
+  };
+
+  const notification = (message, route) => {
+    return (
+      <div className="flex flex-col justify-center items-center mt-4">
+        <p className="font-bold hover:underline">{message}</p>
+        <img src={`/${route}`} className="size-48" />
+      </div>
+    );
+  };
 
   useEffect(() => {
     SetIsGettingData(true);
-    if (currentTab === tabsObj.forYou) {
-      GetPosts(User).finally(() => {
-        SetIsGettingData(false);
-      });
-    } else {
-      getPostsByFollowingUsers(User).finally(() => {
-        SetIsGettingData(false);
-      });
-    }
+    fetchData().finally(() => {
+      SetIsGettingData(false);
+    });
   }, [currentTab]);
 
   return (
@@ -72,15 +88,37 @@ export const Feed = () => {
           <>
             {currentTab === tabsObj.forYou ? (
               <>
-                {posts.map((post) => (
-                  <Post key={post._id} PostInfo={post} />
-                ))}
+                <InfiniteScroll
+                  dataLength={posts.length}
+                  next={fetchData}
+                  hasMore={!allRecordsLoaded}
+                  loader={notification('Loading...', 'Loading.svg')}
+                  endMessage={notification(
+                    'You reached the end',
+                    'InboxEmpty.png'
+                  )}
+                >
+                  {posts.map((post) => (
+                    <Post key={post._id} PostInfo={post} />
+                  ))}
+                </InfiniteScroll>
               </>
             ) : (
               <>
-                {postsFollowing.map((post) => (
-                  <Post key={post._id} PostInfo={post} />
-                ))}
+                <InfiniteScroll
+                  dataLength={postsFollowing.length}
+                  next={fetchData}
+                  hasMore={!allRecordsLoaded}
+                  loader={notification('Loading...', 'Loading.svg')}
+                  endMessage={notification(
+                    'You reached the end',
+                    'InboxEmpty.png'
+                  )}
+                >
+                  {postsFollowing.map((post) => (
+                    <Post key={post._id} PostInfo={post} />
+                  ))}
+                </InfiniteScroll>
               </>
             )}
           </>
