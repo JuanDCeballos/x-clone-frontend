@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from 'react';
 import { PostsContext } from '../../Posts/Context/index.js';
 import { LogInContext } from '../../LogIn/Context/index.js';
 import { LoadingComponent } from '../../Common/Components';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 const tabsObj = {
   forYou: 'For you',
@@ -15,6 +16,13 @@ export const Feed = () => {
   const { User } = useContext(LogInContext);
   const [IsGettingData, SetIsGettingData] = useState(true);
   const [currentTab, setCurrentTab] = useState(tabsObj.forYou);
+  const [allRecordsLoaded, setAllRecordsLoaded] = useState(false);
+
+  const fetchData = async () => {
+    const res = await getPostsByFollowingUsers(User);
+
+    setAllRecordsLoaded(res.resposeLength === 0);
+  };
 
   useEffect(() => {
     SetIsGettingData(true);
@@ -78,9 +86,21 @@ export const Feed = () => {
               </>
             ) : (
               <>
-                {postsFollowing.map((post) => (
-                  <Post key={post._id} PostInfo={post} />
-                ))}
+                <InfiniteScroll
+                  dataLength={postsFollowing.length}
+                  next={fetchData}
+                  hasMore={!allRecordsLoaded}
+                  loader={<h4>Loading...</h4>}
+                  endMessage={
+                    <p style={{ textAlign: 'center' }}>
+                      <b>Yay! You have seen it all</b>
+                    </p>
+                  }
+                >
+                  {postsFollowing.map((post) => (
+                    <Post key={post._id} PostInfo={post} />
+                  ))}
+                </InfiniteScroll>
               </>
             )}
           </>
