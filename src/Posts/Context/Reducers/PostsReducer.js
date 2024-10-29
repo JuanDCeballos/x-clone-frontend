@@ -62,5 +62,27 @@ export const PostsReducer = (state = {}, action) => {
         ...state,
         ModalIsOpen: true,
       };
+
+    case PostReducerTypes.updateLastPostInfoFollowing:
+      return {
+        ...state,
+        lastPostInfoFollowing: {
+          _id: action.payload._id,
+          createdAt: action.payload.createdAt,
+        },
+      };
+
+    case PostReducerTypes.loadPostsFollowing:
+      return {
+        ...state,
+        postsFollowing: [
+          ...new Map(
+            [...(state.postsFollowing || []), ...action.payload].map((post) => [
+              post._id,
+              post,
+            ])
+          ).values(),
+        ],
+      };
   }
 };

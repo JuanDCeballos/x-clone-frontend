@@ -5,5 +5,7 @@ export const PostReducerTypes = {
   InsertCreatedPost: '[Posts] InsertCreatedPost',
   CloseTweetModal: '[Posts] CloseTweetModal',
   OpenTweetModal: '[Posts] OpenTweetModal',
+  updateLastPostInfoFollowing: '[Posts] UpdateLastPostInfoFollowing',
+  loadPostsFollowing: '[Posts] LoadPostsFollowing',
   UpdateLastPostInfoCreatedByUser: '[Posts] UpdateLastPostInfoCreatedByUser',
 };

@@ -24,24 +24,19 @@ export async function CreatePost(Content, UserUID) {
   }
 }
 
-export async function GetAllPosts(Token, LastPostId, LastPostCreatedAt) {
+export async function GetAllPosts(Token, LastPostID, LastPostCreatedAt) {
   try {
     if (!Token) throw new Error('Token is empty.');
-    let Body = {};
-
-    if (LastPostId && LastPostCreatedAt) {
-      Body = {
-        LastPostID: LastPostId,
-        LastPostCreatedAt: LastPostCreatedAt,
-      };
-    }
 
     const result = await axios.get('http://localhost:1234/api/v1/Posts/all', {
       headers: {
         authorization: Token,
         'Content-Type': 'application/json',
       },
-      Body,
+      params: {
+        LastPostID,
+        LastPostCreatedAt,
+      },
     });
 
     return { ok: true, response: result };
@@ -69,6 +64,32 @@ export const getPostById = async (token, postUID) => {
     if (result.data.data === undefined) throw new Error('Data is empty');
 
     return { ok: true, response: result.data.data };
+  } catch (error) {
+    console.error(error);
+    return { ok: false };
+  }
+};
+
+export const getPostsCreatedByFollowingUsers = async (
+  token,
+  lastPostIdFollowing,
+  lastPostCreatedAtFollowing
+) => {
+  try {
+    const result = await axios.get(
+      'http://localhost:1234/api/v1/posts/following',
+      {
+        headers: {
+          authorization: token,
+          'Content-Type': 'application/json',
+        },
+        params: {
+          lastPostIdFollowing,
+          lastPostCreatedAtFollowing,
+        },
+      }
+    );
+    return { ok: true, response: result };
   } catch (error) {
     console.error(error);
     return { ok: false };
