@@ -1,5 +1,4 @@
 import { Tooltip } from 'react-tooltip';
-import { PiUserCircleThin } from 'react-icons/pi';
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 import { TbMessageCircle } from 'react-icons/tb';
 import { LiaRetweetSolid } from 'react-icons/lia';
@@ -7,13 +6,21 @@ import { CiHeart, CiBookmark } from 'react-icons/ci';
 import { BiBarChart } from 'react-icons/bi';
 import { RiShare2Line } from 'react-icons/ri';
 import { GetTimeDifference } from '../../Common/Functions/index.js';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export const Post = ({ PostInfo }) => {
+  const navigate = useNavigate();
   return (
     <>
       <div className="flex px-4 border-l-2 border-r-2 border-b-2 w-[634px] min-h-[124px]">
-        <div className="pt-3 mr-2">
+        <div
+          onClick={() =>
+            navigate(`/profile/${PostInfo?.userInfo?.userName}`, {
+              replace: true,
+            })
+          }
+          className="pt-3 mr-2 cursor-pointer"
+        >
           <img
             src={PostInfo?.userInfo?.photo}
             alt={`${PostInfo?.userInfo?.userName}'s profile`}
