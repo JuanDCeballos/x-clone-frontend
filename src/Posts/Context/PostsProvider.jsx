@@ -2,11 +2,19 @@ import { PostReducerTypes } from './Types/index.js';
 import { useReducer } from 'react';
 import { PostsReducer } from './Reducers/index.js';
 import { PostsContext } from './PostsContext.jsx';
-import { GetAllPosts } from '../Controller/index.js';
+import {
+  GetAllPosts,
+  getPostsCreatedByFollowingUsers,
+} from '../Controller/index.js';
 
 const InialState = {
   posts: [],
+  postsFollowing: [],
   LastPostInfo: {
+    _id: undefined,
+    createdAt: undefined,
+  },
+  lastPostInfoFollowing: {
     _id: undefined,
     createdAt: undefined,
   },
@@ -45,6 +53,34 @@ export const PostsProvider = ({ children }) => {
     return true;
   }
 
+  function UpdateLastPostInfoFollowing(_id, createdAt) {
+    const payload = { _id, createdAt };
+    const action = {
+      type: PostReducerTypes.updateLastPostInfoFollowing,
+      payload,
+    };
+    dispatch(action);
+  }
+
+  const getPostsByFollowingUsers = async (token) => {
+    const requestRes = await getPostsCreatedByFollowingUsers(
+      token,
+      PostsState?.lastPostInfoFollowing?._id,
+      PostsState?.lastPostInfoFollowing?.createdAt
+    );
+    if (!requestRes.ok) return false;
+    console.log(requestRes.response);
+
+    const payload = requestRes.response.data?.posts;
+    const action = { type: PostReducerTypes.loadPostsFollowing, payload };
+    dispatch(action);
+    UpdateLastPostInfoFollowing(
+      requestRes.response.data?.lastPostInfoFollowing?.id,
+      requestRes.response.data?.lastPostInfoFollowing?.createdDateTime
+    );
+    return true;
+  };
+
   function CloseModal() {
     dispatch({ type: PostReducerTypes.CloseTweetModal });
   }
@@ -59,6 +95,7 @@ export const PostsProvider = ({ children }) => {
         ...PostsState,
         InsertCreatedPost,
         GetPosts,
+        getPostsByFollowingUsers,
         CloseModal,
         OpenModal,
       }}
