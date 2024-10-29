@@ -19,22 +19,30 @@ export const Feed = () => {
   const [allRecordsLoaded, setAllRecordsLoaded] = useState(false);
 
   const fetchData = async () => {
-    const res = await getPostsByFollowingUsers(User);
+    let res;
+    if (currentTab === tabsObj.forYou) {
+      res = await GetPosts(User);
+    } else {
+      res = await getPostsByFollowingUsers(User);
+    }
 
     setAllRecordsLoaded(res.resposeLength === 0);
   };
 
+  const notification = (message, route) => {
+    return (
+      <div className="flex flex-col justify-center items-center mt-4">
+        <p className="font-bold hover:underline">{message}</p>
+        <img src={`/${route}`} className="size-48" />
+      </div>
+    );
+  };
+
   useEffect(() => {
     SetIsGettingData(true);
-    if (currentTab === tabsObj.forYou) {
-      GetPosts(User).finally(() => {
-        SetIsGettingData(false);
-      });
-    } else {
-      getPostsByFollowingUsers(User).finally(() => {
-        SetIsGettingData(false);
-      });
-    }
+    fetchData().finally(() => {
+      SetIsGettingData(false);
+    });
   }, [currentTab]);
 
   return (
@@ -80,9 +88,20 @@ export const Feed = () => {
           <>
             {currentTab === tabsObj.forYou ? (
               <>
-                {posts.map((post) => (
-                  <Post key={post._id} PostInfo={post} />
-                ))}
+                <InfiniteScroll
+                  dataLength={posts.length}
+                  next={fetchData}
+                  hasMore={!allRecordsLoaded}
+                  loader={notification('Loading...', 'Loading.svg')}
+                  endMessage={notification(
+                    'You reached the end',
+                    'InboxEmpty.png'
+                  )}
+                >
+                  {posts.map((post) => (
+                    <Post key={post._id} PostInfo={post} />
+                  ))}
+                </InfiniteScroll>
               </>
             ) : (
               <>
@@ -90,12 +109,11 @@ export const Feed = () => {
                   dataLength={postsFollowing.length}
                   next={fetchData}
                   hasMore={!allRecordsLoaded}
-                  loader={<h4>Loading...</h4>}
-                  endMessage={
-                    <p style={{ textAlign: 'center' }}>
-                      <b>Yay! You have seen it all</b>
-                    </p>
-                  }
+                  loader={notification('Loading...', 'Loading.svg')}
+                  endMessage={notification(
+                    'You reached the end',
+                    'InboxEmpty.png'
+                  )}
                 >
                   {postsFollowing.map((post) => (
                     <Post key={post._id} PostInfo={post} />
