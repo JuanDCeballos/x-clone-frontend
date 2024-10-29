@@ -50,7 +50,7 @@ export const PostsProvider = ({ children }) => {
       RequestResult.response.data?.lastPostInfo?.id,
       RequestResult.response.data?.lastPostInfo?.CreatedDateTime
     );
-    return true;
+    return { ok: true, resposeLength: RequestResult.response.data?.length };
   }
 
   function UpdateLastPostInfoFollowing(_id, createdAt) {
