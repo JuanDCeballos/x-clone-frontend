@@ -117,6 +117,10 @@ export const PostsProvider = ({ children }) => {
     return { ok: true, resposeLength: requestRes.response?.length };
   }
 
+  function ClearPostsCreatedByUser() {
+    dispatch({ type: PostReducerTypes.ClearPostsCreatedByUser });
+  }
+
   function CloseModal() {
     dispatch({ type: PostReducerTypes.CloseTweetModal });
   }
@@ -133,6 +137,7 @@ export const PostsProvider = ({ children }) => {
         GetPosts,
         getPostsByFollowingUsers,
         GetPostsCreatedByUser,
+        ClearPostsCreatedByUser,
         CloseModal,
         OpenModal,
       }}
