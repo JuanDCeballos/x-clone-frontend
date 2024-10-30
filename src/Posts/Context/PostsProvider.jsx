@@ -5,6 +5,7 @@ import { PostsContext } from './PostsContext.jsx';
 import {
   GetAllPosts,
   getPostsCreatedByFollowingUsers,
+  GetPostsCreatedByUserName,
 } from '../Controller/index.js';
 
 const InialState = {
@@ -15,6 +16,10 @@ const InialState = {
     createdAt: undefined,
   },
   lastPostInfoFollowing: {
+    _id: undefined,
+    createdAt: undefined,
+  },
+  LastPostInfoCreatedByUser: {
     _id: undefined,
     createdAt: undefined,
   },
@@ -69,8 +74,6 @@ export const PostsProvider = ({ children }) => {
       PostsState?.lastPostInfoFollowing?.createdAt
     );
     if (!requestRes.ok) return false;
-    console.log(requestRes.response);
-
     const payload = requestRes.response.data?.posts;
     const action = { type: PostReducerTypes.loadPostsFollowing, payload };
     dispatch(action);
@@ -80,6 +83,35 @@ export const PostsProvider = ({ children }) => {
     );
     return { ok: true, resposeLength: requestRes.response.data?.length };
   };
+
+  function UpdateLastPostInfoCreatedByUser(_id, createdAt) {
+    const payload = { _id, createdAt };
+    const action = {
+      type: PostReducerTypes.UpdateLastPostInfoCreatedByUser,
+      payload,
+    };
+    dispatch(action);
+  }
+
+  async function GetPostsCreatedByUser(Token, UserName) {
+    const requestRes = await GetPostsCreatedByUserName(
+      Token,
+      UserName,
+      PostsState?.LastPostInfoCreatedByUser?._id,
+      PostsState?.LastPostInfoCreatedByUser?.createdAt
+    );
+
+    if (!requestRes.ok) return false;
+
+    const payload = requestRes.response.data?.posts;
+    const action = { type: PostReducerTypes.LoadPostsCreatedByUser, payload };
+    dispatch(action);
+    UpdateLastPostInfoCreatedByUser(
+      requestRes.response.data?.lastPostInfoFollowing?.id,
+      requestRes.response.data?.lastPostInfoFollowing?.createdDateTime
+    );
+    return { ok: true, resposeLength: requestRes.response.data?.length };
+  }
 
   function CloseModal() {
     dispatch({ type: PostReducerTypes.CloseTweetModal });
@@ -96,6 +128,7 @@ export const PostsProvider = ({ children }) => {
         InsertCreatedPost,
         GetPosts,
         getPostsByFollowingUsers,
+        GetPostsCreatedByUser,
         CloseModal,
         OpenModal,
       }}
