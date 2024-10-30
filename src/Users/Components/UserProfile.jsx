@@ -1,10 +1,13 @@
 import { FaArrowLeft, FaCalendarAlt, FaCheckCircle } from 'react-icons/fa';
 import { useContext, useEffect, useState } from 'react';
-import { getUserByUserName } from '../Controller';
+import { FollowUser, getUserByUserName, UnfollowUser } from '../Controller';
 import { LogInContext } from '../../LogIn/Context';
 import { LoadingComponent } from '../../Common/Components';
 import { FollowersUsersComponent, FollowedUsersComponent } from './';
 import { useParams } from 'react-router-dom';
+import { PostsByUser } from '../../Posts/Components';
+import { PostsContext } from '../../Posts/Context';
+import { toast } from 'sonner';
 
 const TabsDictionary = {
   Posts: 'My Posts',
@@ -13,7 +16,8 @@ const TabsDictionary = {
 };
 
 export const UserProfile = () => {
-  const { User } = useContext(LogInContext);
+  const { User, UserName } = useContext(LogInContext);
+  const { ClearPostsCreatedByUser } = useContext(PostsContext);
   const [CurrentUser, SetCurrentUser] = useState();
   const [IsGettingData, SetIsGettingData] = useState(true);
   const [CurrentTabSelected, SetCurrentTabSelected] = useState(
@@ -22,6 +26,7 @@ export const UserProfile = () => {
   const { userName } = useParams();
 
   useEffect(() => {
+    ClearPostsCreatedByUser();
     SetIsGettingData(true);
     getUserByUserName(User, userName)
       .then((response) => {
@@ -43,7 +48,7 @@ export const UserProfile = () => {
   function GetCurrentViewByTab(SelectedTab) {
     switch (SelectedTab) {
       case TabsDictionary.Posts:
-        break;
+        return <PostsByUser />;
 
       case TabsDictionary.Following:
         return (
@@ -61,22 +66,41 @@ export const UserProfile = () => {
     }
   }
 
+  async function OnFollow() {
+    const result = await FollowUser(User, CurrentUser.uid);
+
+    if (result.ok) {
+      const CurrentUserModified = {
+        ...CurrentUser,
+        CurrentUserFollowUser: true,
+      };
+      SetCurrentUser(CurrentUserModified);
+      toast.success('You follow this user now!');
+    } else {
+      toast.error('An error ocurred!');
+    }
+  }
+  async function OnUnfollow() {
+    const result = await UnfollowUser(User, CurrentUser.uid);
+
+    if (result.ok) {
+      const CurrentUserModified = {
+        ...CurrentUser,
+        CurrentUserFollowUser: false,
+      };
+      SetCurrentUser(CurrentUserModified);
+      toast.success("You don't follow this user now!");
+    } else {
+      toast.error('An error ocurred!');
+    }
+  }
+
   return (
     <div className=" bg-black text-white w-[634px]">
       {IsGettingData ? (
         <LoadingComponent />
       ) : (
         <>
-          <div className="flex items-center p-4 border-b border-gray-800">
-            <FaArrowLeft className="mr-8 cursor-pointer" />
-            <div>
-              <h2 className="font-bold text-xl">{CurrentUser?.Name}</h2>
-              <p className="text-gray-500 text-sm">
-                {CurrentUser?.postsCount} post
-              </p>
-            </div>
-          </div>
-
           <div className="h-48 bg-gray-800 relative">
             <img
               src={CurrentUser?.photo}
@@ -84,13 +108,33 @@ export const UserProfile = () => {
               className="absolute bottom-0 left-4 transform translate-y-1/2 w-32 h-32 rounded-full border-4 border-black"
             />
           </div>
-
           <div className="flex justify-end p-4">
-            <button className="border border-gray-600 text-white px-4 py-2 rounded-full font-bold hover:bg-gray-800">
-              Edit profile
-            </button>
+            {CurrentUser?.userName === UserName ? (
+              <>
+                <div className="mb-6 text-white px-4 py-2 rounded-full font-bold hover:bg-gray-800"></div>
+              </>
+            ) : CurrentUser?.CurrentUserFollowUser ? (
+              <>
+                <>
+                  <button
+                    className="px-4 py-2 text-sm font-bold text-black bg-white rounded-full transition-colors duration-300 hover:bg-blue-500 hover:text-white"
+                    onClick={OnUnfollow}
+                  >
+                    Unfollow
+                  </button>
+                </>
+              </>
+            ) : (
+              <>
+                <button
+                  className="px-4 py-2 text-sm font-bold text-black bg-white rounded-full transition-colors duration-300 hover:bg-blue-500 hover:text-white"
+                  onClick={OnFollow}
+                >
+                  Follow
+                </button>
+              </>
+            )}
           </div>
-
           <div className="p-4">
             <h1 className="font-bold text-xl flex items-center">
               {CurrentUser?.Name}
@@ -112,7 +156,6 @@ export const UserProfile = () => {
               </span>
             </div>
           </div>
-
           <div className="flex border-b border-gray-800">
             {[
               TabsDictionary.Posts,

@@ -3,7 +3,7 @@ import { LogInContext } from '../../LogIn/Context';
 import { GetFollowed } from '../Controller';
 import { LoadingComponent } from '../../Common/Components';
 import { toast } from 'sonner';
-import { UnfollowUser } from '../Controller';
+import { UnfollowUser, FollowUser } from '../Controller';
 import { useParams } from 'react-router-dom';
 
 export const FollowedUsersComponent = ({ UpdateParentFunction }) => {
@@ -35,10 +35,33 @@ export const FollowedUsersComponent = ({ UpdateParentFunction }) => {
     }
   };
 
+  async function OnFollowUser(FollowedUID) {
+    const result = await FollowUser(User, FollowedUID);
+
+    if (result.ok) {
+      const targetPosition = Users.findIndex((U) => U.uid === FollowedUID);
+      const ListToModify = [...Users];
+      ListToModify[targetPosition].CurrentUserAlreadyFollowUser = true;
+      SetUsers(ListToModify);
+      toast.success('Now you follow this user!');
+    } else {
+      toast.error('An error ocurred!');
+    }
+  }
+
   return (
     <div className="min-w-lg bg-black text-white">
       {IsGettingData ? (
         <LoadingComponent />
+      ) : Users.length === 0 ? (
+        <>
+          <div className="flex flex-col justify-center items-center mt-4">
+            <p className="font-bold hover:underline">
+              This user doesn't follow anyone yet
+            </p>
+            <img src="/SadFace.png" className="size-48" />
+          </div>
+        </>
       ) : (
         <>
           {Users.map((user, index) => (
@@ -67,6 +90,17 @@ export const FollowedUsersComponent = ({ UpdateParentFunction }) => {
                         }}
                       >
                         Unfollow
+                      </button>
+                    </>
+                  ) : !user.CurrentUserAlreadyFollowUser ? (
+                    <>
+                      <button
+                        className="px-4 py-1 text-sm font-bold text-black bg-white rounded-full transition-colors duration-300 hover:bg-blue-500 hover:text-white"
+                        onClick={() => {
+                          OnFollowUser(user.uid);
+                        }}
+                      >
+                        Follow
                       </button>
                     </>
                   ) : (

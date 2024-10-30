@@ -2,6 +2,25 @@ import { PostReducerTypes } from '../Types';
 
 export const PostsReducer = (state = {}, action) => {
   switch (action.type) {
+    case PostReducerTypes.ClearPostsCreatedByUser:
+      return {
+        ...state,
+        postsCreatedByUser: [],
+        LastPostInfoCreatedByUser: {
+          _id: undefined,
+          createdAt: undefined,
+        },
+      };
+
+    case PostReducerTypes.UpdateLastPostInfoCreatedByUser:
+      return {
+        ...state,
+        LastPostInfoCreatedByUser: {
+          _id: action.payload._id,
+          createdAt: action.payload.createdAt,
+        },
+      };
+
     case PostReducerTypes.UpdateLastPostInfo:
       return {
         ...state,
@@ -20,6 +39,18 @@ export const PostsReducer = (state = {}, action) => {
               post._id,
               post,
             ])
+          ).values(),
+        ],
+      };
+
+    case PostReducerTypes.LoadPostsCreatedByUser:
+      return {
+        ...state,
+        postsCreatedByUser: [
+          ...new Map(
+            [...(state.postsCreatedByUser || []), ...action.payload].map(
+              (post) => [post._id, post]
+            )
           ).values(),
         ],
       };
