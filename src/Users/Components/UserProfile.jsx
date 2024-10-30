@@ -5,6 +5,7 @@ import { LogInContext } from '../../LogIn/Context';
 import { LoadingComponent } from '../../Common/Components';
 import { FollowersUsersComponent, FollowedUsersComponent } from './';
 import { useParams } from 'react-router-dom';
+import { PostsByUser } from '../../Posts/Components';
 
 const TabsDictionary = {
   Posts: 'My Posts',
@@ -43,7 +44,7 @@ export const UserProfile = () => {
   function GetCurrentViewByTab(SelectedTab) {
     switch (SelectedTab) {
       case TabsDictionary.Posts:
-        break;
+        return <PostsByUser />;
 
       case TabsDictionary.Following:
         return (
