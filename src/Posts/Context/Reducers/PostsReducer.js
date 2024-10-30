@@ -7,7 +7,7 @@ export const PostsReducer = (state = {}, action) => {
         ...state,
         LastPostInfoCreatedByUser: {
           _id: action.payload._id,
-          createdAt: action.payload.CreatedAt,
+          createdAt: action.payload.createdAt,
         },
       };
 
