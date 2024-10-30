@@ -1,6 +1,5 @@
 export const PostReducerTypes = {
   LoadPosts: '[Posts] Load',
-  LoadPostsCreatedByUser: '[Posts] LoadPostsCreatedByUser',
   UpdateLastPostInfo: '[Posts] UpdateLastPostInfo',
   InsertCreatedPost: '[Posts] InsertCreatedPost',
 
@@ -12,5 +11,5 @@ export const PostReducerTypes = {
 
   UpdateLastPostInfoCreatedByUser:
     '[Posts] UpdateLastPostInfoCreatedByUserName',
-  LoadPostsCreatedByUserName: '[Posts] LoadPostsCreatedByUserName',
+  LoadPostsCreatedByUser: '[Posts] LoadPostsCreatedByUserName',
 };
