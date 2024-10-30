@@ -1,6 +1,6 @@
 import { FaArrowLeft, FaCalendarAlt, FaCheckCircle } from 'react-icons/fa';
 import { useContext, useEffect, useState } from 'react';
-import { FollowUser, getUserByUserName } from '../Controller';
+import { FollowUser, getUserByUserName, UnfollowUser } from '../Controller';
 import { LogInContext } from '../../LogIn/Context';
 import { LoadingComponent } from '../../Common/Components';
 import { FollowersUsersComponent, FollowedUsersComponent } from './';
@@ -80,6 +80,20 @@ export const UserProfile = () => {
       toast.error('An error ocurred!');
     }
   }
+  async function OnUnfollow() {
+    const result = await UnfollowUser(User, CurrentUser.uid);
+
+    if (result.ok) {
+      const CurrentUserModified = {
+        ...CurrentUser,
+        CurrentUserFollowUser: false,
+      };
+      SetCurrentUser(CurrentUserModified);
+      toast.success("You don't follow this user now!");
+    } else {
+      toast.error('An error ocurred!');
+    }
+  }
 
   return (
     <div className=" bg-black text-white w-[634px]">
@@ -104,10 +118,20 @@ export const UserProfile = () => {
             />
           </div>
           <div className="flex justify-end p-4">
-            {CurrentUser?.userName === UserName ||
-            CurrentUser?.CurrentUserFollowUser ? (
+            {CurrentUser?.userName === UserName ? (
               <>
                 <div className="mb-6 text-white px-4 py-2 rounded-full font-bold hover:bg-gray-800"></div>
+              </>
+            ) : CurrentUser?.CurrentUserFollowUser ? (
+              <>
+                <>
+                  <button
+                    className="px-4 py-2 text-sm font-bold text-black bg-white rounded-full transition-colors duration-300 hover:bg-blue-500 hover:text-white"
+                    onClick={OnUnfollow}
+                  >
+                    Unfollow
+                  </button>
+                </>
               </>
             ) : (
               <>
