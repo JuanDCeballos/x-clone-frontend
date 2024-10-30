@@ -70,7 +70,7 @@ export const FollowersUsersComponent = ({ UpdateParentFunction }) => {
                       {user.name}
                     </span>
                   </div>
-                  {!user?.AlreadyFollowUser && userName === UserName ? (
+                  {!user?.AlreadyFollowUser ? (
                     <>
                       <button
                         className="px-4 py-1 text-sm font-bold text-black bg-white rounded-full transition-colors duration-300 hover:bg-blue-500 hover:text-white"
