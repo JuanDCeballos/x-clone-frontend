@@ -106,17 +106,19 @@ export async function GetPostsCreatedByUserName(
     if (!Token) throw new Error('Token is empty.');
     if (!UserName) throw new Error('User Name is empty.');
 
-    const result = await axios.get('http://localhost:1234/api/v1/Posts/User', {
-      headers: {
-        authorization: Token,
-        'Content-Type': 'application/json',
-      },
-      params: {
-        UserName,
-        lastPostId: LastPostID,
-        lastPostCreatedAt: LastPostCreatedAt,
-      },
-    });
+    const result = await axios.get(
+      `http://localhost:1234/api/v1/Posts/User/${UserName}`,
+      {
+        headers: {
+          authorization: Token,
+          'Content-Type': 'application/json',
+        },
+        params: {
+          lastPostId: LastPostID,
+          lastPostCreatedAt: LastPostCreatedAt,
+        },
+      }
+    );
 
     return { ok: true, response: result.data };
   } catch (error) {
