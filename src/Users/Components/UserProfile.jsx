@@ -6,6 +6,7 @@ import { LoadingComponent } from '../../Common/Components';
 import { FollowersUsersComponent, FollowedUsersComponent } from './';
 import { useParams } from 'react-router-dom';
 import { PostsByUser } from '../../Posts/Components';
+import { PostsContext } from '../../Posts/Context';
 
 const TabsDictionary = {
   Posts: 'My Posts',
@@ -15,6 +16,7 @@ const TabsDictionary = {
 
 export const UserProfile = () => {
   const { User } = useContext(LogInContext);
+  const { ClearPostsCreatedByUser } = useContext(PostsContext);
   const [CurrentUser, SetCurrentUser] = useState();
   const [IsGettingData, SetIsGettingData] = useState(true);
   const [CurrentTabSelected, SetCurrentTabSelected] = useState(
@@ -23,6 +25,7 @@ export const UserProfile = () => {
   const { userName } = useParams();
 
   useEffect(() => {
+    ClearPostsCreatedByUser();
     SetIsGettingData(true);
     getUserByUserName(User, userName)
       .then((response) => {
