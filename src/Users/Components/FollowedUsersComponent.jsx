@@ -3,7 +3,7 @@ import { LogInContext } from '../../LogIn/Context';
 import { GetFollowed } from '../Controller';
 import { LoadingComponent } from '../../Common/Components';
 import { toast } from 'sonner';
-import { UnfollowUser } from '../Controller';
+import { UnfollowUser, FollowUser } from '../Controller';
 import { useParams } from 'react-router-dom';
 
 export const FollowedUsersComponent = ({ UpdateParentFunction }) => {
@@ -34,6 +34,20 @@ export const FollowedUsersComponent = ({ UpdateParentFunction }) => {
       toast.error('Unfollow user failed.');
     }
   };
+
+  async function OnFollowUser(FollowedUID) {
+    const result = await FollowUser(User, FollowedUID);
+
+    if (result.ok) {
+      const targetPosition = Users.findIndex((U) => U.uid === FollowedUID);
+      const ListToModify = [...Users];
+      ListToModify[targetPosition].CurrentUserAlreadyFollowUser = true;
+      SetUsers(ListToModify);
+      toast.success('Now you follow this user!');
+    } else {
+      toast.error('An error ocurred!');
+    }
+  }
 
   return (
     <div className="min-w-lg bg-black text-white">
@@ -76,6 +90,17 @@ export const FollowedUsersComponent = ({ UpdateParentFunction }) => {
                         }}
                       >
                         Unfollow
+                      </button>
+                    </>
+                  ) : !user.CurrentUserAlreadyFollowUser ? (
+                    <>
+                      <button
+                        className="px-4 py-1 text-sm font-bold text-black bg-white rounded-full transition-colors duration-300 hover:bg-blue-500 hover:text-white"
+                        onClick={() => {
+                          OnFollowUser(user.uid);
+                        }}
+                      >
+                        Follow
                       </button>
                     </>
                   ) : (
