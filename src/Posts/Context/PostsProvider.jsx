@@ -11,6 +11,7 @@ import {
 const InialState = {
   posts: [],
   postsFollowing: [],
+  postsCreatedByUser: [],
   LastPostInfo: {
     _id: undefined,
     createdAt: undefined,
@@ -101,16 +102,19 @@ export const PostsProvider = ({ children }) => {
       PostsState?.LastPostInfoCreatedByUser?.createdAt
     );
 
-    if (!requestRes.ok) return false;
+    if (!requestRes.ok) {
+      console.error(requestRes.response);
+      return false;
+    }
 
-    const payload = requestRes.response.data?.posts;
+    const payload = requestRes.response?.posts;
     const action = { type: PostReducerTypes.LoadPostsCreatedByUser, payload };
     dispatch(action);
     UpdateLastPostInfoCreatedByUser(
-      requestRes.response.data?.lastPostInfoFollowing?.id,
-      requestRes.response.data?.lastPostInfoFollowing?.createdDateTime
+      requestRes.response?.lastPostInfo?.id,
+      requestRes.response?.lastPostInfo?.createdDateTime
     );
-    return { ok: true, resposeLength: requestRes.response.data?.length };
+    return { ok: true, resposeLength: requestRes.response?.length };
   }
 
   function CloseModal() {
