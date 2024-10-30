@@ -1,17 +1,36 @@
-import { Tweet, Post } from '../../Posts/Components';
+import { Post } from '../../Posts/Components';
 import { useContext, useEffect, useState } from 'react';
 import { PostsContext } from '../../Posts/Context/index.js';
 import { LogInContext } from '../../LogIn/Context/index.js';
 import { LoadingComponent } from '../../Common/Components';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import { useParams } from 'react-router-dom';
 
 export const PostsByUser = () => {
-  const { GetPosts, posts } = useContext(PostsContext);
-  const { User, UserName } = useContext(LogInContext);
+  const { postsCreatedByUser, GetPostsCreatedByUser } =
+    useContext(PostsContext);
+  const { User } = useContext(LogInContext);
   const [IsGettingData, SetIsGettingData] = useState(true);
+  const [allRecordsLoaded, setAllRecordsLoaded] = useState(false);
+  const { userName } = useParams();
+
+  const fetchData = async () => {
+    const response = await GetPostsCreatedByUser(User, userName);
+    setAllRecordsLoaded(response.resposeLength === 0);
+  };
+
+  const notification = (message, route) => {
+    return (
+      <div className="flex flex-col justify-center items-center mt-4">
+        <p className="font-bold hover:underline">{message}</p>
+        <img src={`/${route}`} className="size-48" />
+      </div>
+    );
+  };
 
   useEffect(() => {
     SetIsGettingData(true);
-    GetPosts(User).finally(() => {
+    fetchData().then(() => {
       SetIsGettingData(false);
     });
   }, []);
@@ -23,19 +42,17 @@ export const PostsByUser = () => {
           <LoadingComponent />
         ) : (
           <>
-            <div className="border-l-2 border-r-2 flex text-center h-11  items-center justify-center">
-              <div className="flex-1 cursor-pointer">
-                <span>For you</span>
-              </div>
-              <div className="border-2 min-h-full rounded-b-full rounded-t-full border-gray-400"></div>
-              <div className="flex-1 cursor-pointer">
-                <span>Following</span>
-              </div>
-            </div>
-            <Tweet />
-            {posts.map((post) => (
-              <Post key={post._id} PostInfo={post} />
-            ))}
+            <InfiniteScroll
+              dataLength={postsCreatedByUser?.length}
+              next={fetchData}
+              hasMore={!allRecordsLoaded}
+              loader={notification('Loading...', 'Loading.svg')}
+              endMessage={notification('You reached the end', 'InboxEmpty.png')}
+            >
+              {postsCreatedByUser?.map((post) => (
+                <Post key={post._id} PostInfo={post} />
+              ))}
+            </InfiniteScroll>
           </>
         )}
       </div>
