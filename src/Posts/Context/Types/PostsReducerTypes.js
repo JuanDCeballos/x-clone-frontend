@@ -12,4 +12,5 @@ export const PostReducerTypes = {
   UpdateLastPostInfoCreatedByUser:
     '[Posts] UpdateLastPostInfoCreatedByUserName',
   LoadPostsCreatedByUser: '[Posts] LoadPostsCreatedByUserName',
+  ClearPostsCreatedByUser: '[Posts] ClearPostsCreatedByUser',
 };
