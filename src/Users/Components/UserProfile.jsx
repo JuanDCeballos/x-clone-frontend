@@ -101,15 +101,6 @@ export const UserProfile = () => {
         <LoadingComponent />
       ) : (
         <>
-          <div className="flex items-center p-4 border-b border-gray-800">
-            <FaArrowLeft className="mr-8 cursor-pointer" />
-            <div>
-              <h2 className="font-bold text-xl">{CurrentUser?.Name}</h2>
-              <p className="text-gray-500 text-sm">
-                {CurrentUser?.postsCount} post
-              </p>
-            </div>
-          </div>
           <div className="h-48 bg-gray-800 relative">
             <img
               src={CurrentUser?.photo}
