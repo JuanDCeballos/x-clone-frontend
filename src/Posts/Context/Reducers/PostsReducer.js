@@ -2,6 +2,16 @@ import { PostReducerTypes } from '../Types';
 
 export const PostsReducer = (state = {}, action) => {
   switch (action.type) {
+    case PostReducerTypes.ClearPostsCreatedByUser:
+      return {
+        ...state,
+        postsCreatedByUser: [],
+        LastPostInfoCreatedByUser: {
+          _id: undefined,
+          createdAt: undefined,
+        },
+      };
+
     case PostReducerTypes.UpdateLastPostInfoCreatedByUser:
       return {
         ...state,
