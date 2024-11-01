@@ -28,6 +28,10 @@ const routes = createBrowserRouter([
     ],
   },
   {
+    path: 'notFound',
+    element: <PageNotFoundComponent />,
+  },
+  {
     path: 'login',
     element: (
       <PublicRouter>

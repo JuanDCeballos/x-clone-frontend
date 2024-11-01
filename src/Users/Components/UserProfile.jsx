@@ -1,16 +1,16 @@
-import { FaArrowLeft, FaCalendarAlt, FaCheckCircle } from 'react-icons/fa';
+import { FaCalendarAlt, FaCheckCircle } from 'react-icons/fa';
 import { useContext, useEffect, useState } from 'react';
 import { FollowUser, getUserByUserName, UnfollowUser } from '../Controller';
 import { LogInContext } from '../../LogIn/Context';
 import { LoadingComponent } from '../../Common/Components';
 import { FollowersUsersComponent, FollowedUsersComponent } from './';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { PostsByUser } from '../../Posts/Components';
 import { PostsContext } from '../../Posts/Context';
 import { toast } from 'sonner';
 
 const TabsDictionary = {
-  Posts: 'My Posts',
+  Posts: 'Posts',
   Followers: 'Followers',
   Following: 'Following',
 };
@@ -24,6 +24,7 @@ export const UserProfile = () => {
     TabsDictionary.Posts
   );
   const { userName } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     ClearPostsCreatedByUser();
@@ -31,6 +32,9 @@ export const UserProfile = () => {
     getUserByUserName(User, userName)
       .then((response) => {
         SetCurrentUser(response.data.data);
+      })
+      .catch(() => {
+        navigate('notFound', { replace: true });
       })
       .finally(() => {
         SetIsGettingData(false);
