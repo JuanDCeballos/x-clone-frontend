@@ -5,12 +5,14 @@ import { LoadingComponent } from '../../Common/Components';
 import { toast } from 'sonner';
 import { FollowUser } from '../Controller';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export const FollowersUsersComponent = ({ UpdateParentFunction }) => {
-  const { User, UserName } = useContext(LogInContext);
+  const { User } = useContext(LogInContext);
   const [IsGettingData, SetIsGettingData] = useState(true);
   const [Users, SetUsers] = useState([]);
   const { userName } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     SetIsGettingData(true);
@@ -61,7 +63,12 @@ export const FollowersUsersComponent = ({ UpdateParentFunction }) => {
               <img
                 src={user.photo}
                 alt={`${user.userName} avatar`}
-                className="w-12 h-12 rounded-full mr-3"
+                className="w-12 h-12 rounded-full mr-3 cursor-pointer"
+                onClick={() => {
+                  navigate(`/profile/${user?.userName}`, {
+                    replace: true,
+                  });
+                }}
               />
               <div className="flex-grow">
                 <div className="flex items-center justify-between">
