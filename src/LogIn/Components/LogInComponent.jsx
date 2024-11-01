@@ -82,14 +82,20 @@ export const LogInComponent = () => {
           </div>
           <div className="mt-6 border-t-2 border-gray-600 w-full"></div>
           <div className="flex flex-col md:flex-row gap-4 mt-6">
-            <button className="bg-white rounded-full w-full h-12 flex items-center justify-center font-semibold hover:bg-gray-200 transition-colors duration-300">
+            <Link
+              to="underConstruction"
+              className="bg-white rounded-full w-full h-12 flex items-center justify-center font-semibold hover:bg-gray-200 transition-colors duration-300"
+            >
               <FaGoogle className="text-xl mr-4" />
               Sign in with Google
-            </button>
-            <button className="bg-white rounded-full w-full h-12 flex items-center justify-center font-semibold hover:bg-gray-200 transition-colors duration-300">
+            </Link>
+            <Link
+              to="underConstruction"
+              className="bg-white rounded-full w-full h-12 flex items-center justify-center font-semibold hover:bg-gray-200 transition-colors duration-300"
+            >
               <FaApple className="text-xl mr-4" />
               Sign in with Apple
-            </button>
+            </Link>
           </div>
           <Link
             to="/register"
