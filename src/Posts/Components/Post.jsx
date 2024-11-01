@@ -42,7 +42,7 @@ export const Post = ({ PostInfo }) => {
               <Tooltip id="tooltip-more" />
             </div>
             <div className="py-3">
-              <span>{PostInfo?.content}</span>
+              <span className="break-all">{PostInfo?.content}</span>
             </div>
           </Link>
           <div className="pb-2">
