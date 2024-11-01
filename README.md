@@ -2,6 +2,12 @@
 
 This is a copy of X.
 
+## Team members
+
+1. [Thomas Aguirre Gonzalez](https://github.com/Thomas-Parker24)
+2. [Nicolas Augusto Zapata Valdes](https://github.com/NicolasZapataValdes)
+3. [Juan David Ceballos Lopez](https://github.com/JuanDCeballos)
+
 ## How to use the App?
 
 1. clone the project.
@@ -25,9 +31,3 @@ This is a copy of X.
 4. [Sooner](https://sonner.emilkowal.ski/)
 5. [React-infinite-scroll-component](https://www.npmjs.com/package/react-infinite-scroll-component)
 6. [React-tooltip](https://react-tooltip.com/docs/getting-started)
-
-## Team members
-
-1. [Thomas Aguirre Gonzalez](https://github.com/Thomas-Parker24)
-2. [Nicolas Augusto Zapata Valdes](https://github.com/NicolasZapataValdes)
-3. [Juan David Ceballos Lopez](https://github.com/JuanDCeballos)
