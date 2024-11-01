@@ -5,12 +5,14 @@ import { LoadingComponent } from '../../Common/Components';
 import { toast } from 'sonner';
 import { UnfollowUser, FollowUser } from '../Controller';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export const FollowedUsersComponent = ({ UpdateParentFunction }) => {
   const { User, UserName } = useContext(LogInContext);
   const [IsGettingData, SetIsGettingData] = useState(true);
   const [Users, SetUsers] = useState([]);
   const { userName } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     SetIsGettingData(true);
@@ -73,6 +75,11 @@ export const FollowedUsersComponent = ({ UpdateParentFunction }) => {
                 src={user.photo}
                 alt={`${user.userName} avatar`}
                 className="w-12 h-12 rounded-full mr-3"
+                onClick={() => {
+                  navigate(`/profile/${user?.userName}`, {
+                    replace: true,
+                  });
+                }}
               />
               <div className="flex-grow">
                 <div className="flex items-center justify-between">
@@ -84,7 +91,7 @@ export const FollowedUsersComponent = ({ UpdateParentFunction }) => {
                   {UserName === userName ? (
                     <>
                       <button
-                        className="px-4 py-1 text-sm font-bold text-black bg-white rounded-full transition-colors duration-300 hover:bg-blue-500 hover:text-white"
+                        className="px-4 py-1 text-sm font-bold text-black bg-white rounded-full transition-colors duration-300 hover:bg-blue-500 hover:text-white cursor-pointer"
                         onClick={() => {
                           UnFollowUser(user.uid);
                         }}
