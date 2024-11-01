@@ -5,7 +5,7 @@ function App() {
   // dotenv.config();
   return (
     <>
-      <div className="flex bg-black text-white">
+      <div className="flex bg-black text-white min-h-dvh">
         <div className="flex-1">
           <Toolbar />
         </div>
