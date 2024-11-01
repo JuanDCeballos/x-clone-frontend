@@ -1,4 +1,4 @@
-import { FaArrowLeft, FaCalendarAlt, FaCheckCircle } from 'react-icons/fa';
+import { FaCalendarAlt, FaCheckCircle } from 'react-icons/fa';
 import { useContext, useEffect, useState } from 'react';
 import { FollowUser, getUserByUserName, UnfollowUser } from '../Controller';
 import { LogInContext } from '../../LogIn/Context';
@@ -10,7 +10,7 @@ import { PostsContext } from '../../Posts/Context';
 import { toast } from 'sonner';
 
 const TabsDictionary = {
-  Posts: 'My Posts',
+  Posts: 'Posts',
   Followers: 'Followers',
   Following: 'Following',
 };
