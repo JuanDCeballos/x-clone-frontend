@@ -31,7 +31,7 @@ const routes = createBrowserRouter([
     path: 'login',
     element: (
       <PublicRouter>
-        <LogInComponent />,
+        <LogInComponent />
       </PublicRouter>
     ),
   },
@@ -39,7 +39,7 @@ const routes = createBrowserRouter([
     path: 'logout',
     element: (
       <PrivateRouter>
-        <LogOutComponent />,
+        <LogOutComponent />
       </PrivateRouter>
     ),
   },
@@ -47,7 +47,7 @@ const routes = createBrowserRouter([
     path: 'register',
     element: (
       <PublicRouter>
-        <UserRegister />,
+        <UserRegister />
       </PublicRouter>
     ),
   },
